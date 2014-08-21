@@ -44,9 +44,10 @@
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Search</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="${g.createLink(controller: 'import', action: 'importReport')}" target="_blank">Import Product</a></li>
+                    <li><a href="${g.createLink(controller: 'import', action: 'importReport')}">Import Product</a></li>
                 </ul>
             </li>
+
 
             %{--<li>
                 <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>

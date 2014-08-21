@@ -50,10 +50,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         runtime 'mysql:mysql-connector-java:5.1.29'
         compile 'org.apache.commons:commons-lang3:3.1'
-//        build 'com.lowagie:itext:2.1.7.js2'
-        compile('com.lowagie:itext:2.1.7') {
-            export = false
-        }
+        build 'com.lowagie:itext:2.1.7'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
     }
@@ -70,10 +67,10 @@ grails.project.dependency.resolution = {
        /* compile ":jasper:1.9.0"{
             excludes
         }*/
-        compile (':jasper:1.9.0') {
-            excludes "itext" // excludes most recent version
-        }
-
+//        compile (':jasper:1.9.0') {
+//            excludes "itext" // excludes most recent version
+//        }
+        compile ":jasper:1.9.0"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
         runtime ":database-migration:1.4.0"

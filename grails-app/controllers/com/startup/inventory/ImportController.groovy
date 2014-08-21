@@ -179,28 +179,44 @@ class ImportController {
 
     private static final String JASPER_FILE = 'reportInventoryImport.jasper'
     private static final String REPORT_FILE_FORMAT = 'pdf'
-    private static final String OUTPUT_FILE_NAME = "reportInventoryImport.pdf"
+    private static final String OUTPUT_FILE_NAME = "reportInventoryImport.jasper"
 
     def importReport() {
-        //def companyLogo = grailsApplication.mainContext.servletContext.getRealPath("/reports/images/Logo.jpg")
+//        //def companyLogo = grailsApplication.mainContext.servletContext.getRealPath("/reports/images/Logo.jpg")
+//
+//        Map reportMap = new LinkedHashMap()
+//        reportMap.put("lcNo",12)
+//
+//        def reportFolder1 = grailsApplication.config.grails.databinding.dateFormats;
+//        def reportDir = grailsApplication.config.jasper.dir.reports;
+//
+////        ApplicationHolder.getApplication().getParentContext().getResource("file/recsys").getFile();
+//
+//       // grailsAttributes.getApplicationContext().getResource("/relative/path/").getFile().toString()
+////        String reportDir = reportFolder.absolutePath;
+//        println "reportDir " + reportDir
+//        JasperReportDef reportDef = new JasperReportDef(name: 'report1.jasper', fileFormat: JasperExportFormat.PDF_FORMAT,
+//                parameters: reportMap)
+//        ByteArrayOutputStream report = jasperService.generateReport(reportDef)            // generate report
+//
+//        response.contentType = grailsApplication.config.grails.mime.types[REPORT_FILE_FORMAT]
+//        response.setHeader("Content-disposition", "inline;filename=${OUTPUT_FILE_NAME}")
+//        response.outputStream << report.toByteArray()
 
-        Map reportMap = new LinkedHashMap()
-        reportMap.put("lcNo",12)
 
-        def reportFolder1 = grailsApplication.config.grails.databinding.dateFormats;
-        def reportDir = grailsApplication.config.jasper.dir.reports;
+        Map paramsMap = new LinkedHashMap()
+        paramsMap.put("lcNo",12)
+        String outputFileName = 'studentList.pdf'
+        JasperReportDef reportDef = new JasperReportDef(name: JASPER_FILE, fileFormat: JasperExportFormat.PDF_FORMAT, parameters: paramsMap)
 
-//        ApplicationHolder.getApplication().getParentContext().getResource("file/recsys").getFile();
-
-       // grailsAttributes.getApplicationContext().getResource("/relative/path/").getFile().toString()
-//        String reportDir = reportFolder.absolutePath;
-        println "reportDir " + reportDir
-        JasperReportDef reportDef = new JasperReportDef(name: 'report1.jasper', fileFormat: JasperExportFormat.PDF_FORMAT,
-                parameters: reportMap)
-        ByteArrayOutputStream report = jasperService.generateReport(reportDef)            // generate report
-
-        response.contentType = grailsApplication.config.grails.mime.types[REPORT_FILE_FORMAT]
-        response.setHeader("Content-disposition", "inline;filename=${OUTPUT_FILE_NAME}")
+        ByteArrayOutputStream report = jasperService.generateReport(reportDef)
+        response.contentType ='application/pdf'
+        response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
         response.outputStream << report.toByteArray()
+
+//        response.outputStream.flush()
+//        response.outputStream.close()
+
+
     }
 }
