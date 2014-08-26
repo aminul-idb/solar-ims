@@ -15,9 +15,9 @@
             <li class="active">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Settings</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="${g.createLink(controller: 'categoryType',action: 'index')}">Add Category</a></li>
+                    <li><a href="${g.createLink(controller: 'categoryType',action: 'index')}">Product</a></li>
                     %{--<li><a href="${g.createLink(controller: 'subCat',action: 'index')}">Add Sub Category</a></li>--}%
-                    <li><a href="${g.createLink(controller: 'productItem',action: 'index')}">Add Product</a></li>
+                    <li><a href="${g.createLink(controller: 'productItem',action: 'index')}">Sub Product</a></li>
                 </ul>
             </li>
 
@@ -42,7 +42,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Search</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Report</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="${g.createLink(controller: 'import', action: 'importReport')}">Import Product</a></li>
                 </ul>

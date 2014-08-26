@@ -46,7 +46,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productItem" class="control-label">Product Name</label>
+                                                <label for="productItem" class="control-label">Sub Product Name</label>
                                                 <g:select class="form-control" id="productItem" name='productItem'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${ProductItem.list()}'
@@ -57,7 +57,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productAmount" class="control-label">Product Amount</label>
+                                                <label for="productAmount" class="control-label">Sub Product Amount</label>
                                                 <g:textField class="form-control" id="productAmount" tabindex="2"
                                                              name="productAmount" placeholder="Product Amount."/>
                                                 <span class="help-block" for="productAmount"></span>
@@ -117,8 +117,8 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">Product Name</th>
-                                            <th class="text-center">Product Amount</th>
+                                            <th class="text-center">Sub Product Name</th>
+                                            <th class="text-center">Sub Product Amount</th>
                                             <th class="text-center">Damage Date</th>
                                             <th class="text-center">Description</th>
                                             <th class="text-center">Action</th>

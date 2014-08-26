@@ -72,7 +72,6 @@ class ImportController {
         // save
         def productItemList = params.productItemId
         def amountList = params.amount
-        print(">>productPrice >> "+ params.productPrice)
         def productPriceList = params.productPrice
         def productCheckList = params.productCheck
 
@@ -182,18 +181,22 @@ class ImportController {
 
     def importReport() {
 //        def companyLogo = grailsApplication.mainContext.servletContext.getRealPath("/reports/images/Logo.jpg")
-        Map paramsMap = new LinkedHashMap()
-        paramsMap.put("lcNo",12)
-        String outputFileName = 'reportInventoryImport.pdf'
-        JasperReportDef reportDef = new JasperReportDef(
-                name: JASPER_FILE,
-                fileFormat: JasperExportFormat.PDF_FORMAT,
-                parameters: paramsMap
-        )
 
-        ByteArrayOutputStream report = jasperService.generateReport(reportDef)
-        response.contentType ='application/pdf'
-        response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
-        response.outputStream << report.toByteArray()
+        if(params.submit == "report"){
+            Map paramsMap = new LinkedHashMap()
+            paramsMap.put("lcNo", params.lcNo)
+            String outputFileName = 'reportInventoryImport.pdf'
+            JasperReportDef reportDef = new JasperReportDef(
+                    name: JASPER_FILE,
+                    fileFormat: JasperExportFormat.PDF_FORMAT,
+                    parameters: paramsMap
+            )
+
+            ByteArrayOutputStream report = jasperService.generateReport(reportDef)
+            response.contentType ='application/pdf'
+            response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
+            response.outputStream << report.toByteArray()
+        }
+
     }
 }

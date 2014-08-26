@@ -14,7 +14,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 
     <div class="col-lg-8">
-        <h2>Create Product</h2>
+        <h2>Create Sub Product</h2>
     </div>
 
     <div class="col-lg-4">
@@ -46,7 +46,7 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="name" class="control-label">Product Name</label>
+                                                <label for="name" class="control-label">Sub Product Name</label>
                                                 <g:textField class="form-control" id="name" tabindex="1" name="name"
                                                              placeholder="Enter Product Name."/>
                                                 <span for="name" class="help-block"></span>
@@ -64,7 +64,7 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="categoryType" class=" control-label">Category</label><br>
+                                                <label for="categoryType" class=" control-label">Product</label><br>
                                                 <g:select class="form-control" id="categoryType" name='categoryType'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${CategoryType.list()}'
@@ -121,7 +121,7 @@
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Description</th>
                                             <th class="text-center">Status</th>
-                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Product</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                         </thead>

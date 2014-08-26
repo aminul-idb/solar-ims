@@ -72,7 +72,10 @@ class BranchDistributionController {
         def productPriceList = params.productPrice
         def productCheckList = params.productCheck
 
-        for (int i = 0; i < productItemList.length; i++) {
+        print("productItemList>>" + productItemList)
+        print("length>" + productItemList.length)
+
+        for (int i=0; i<productItemList.length; i++) {
             BranchDistribution branchDistribution = new BranchDistribution()
             if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
                 println "amount =" + amountList[i] + "| product Id =" + productItemList[i]

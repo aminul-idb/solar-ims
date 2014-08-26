@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Create Category</title>
+    <title>Create Product</title>
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
 
@@ -13,7 +13,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 
     <div class="col-lg-8">
-        <h2>Create Category</h2>
+        <h2>Create Product</h2>
     </div>
 
     <div class="col-lg-4">
@@ -45,9 +45,9 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="name" class="control-label">Category Name</label>
+                                                <label for="name" class="control-label">Product Name</label>
                                                 <g:textField class="form-control" id="name" tabindex="1" name="name"
-                                                             placeholder="Enter Category Name."/>
+                                                             placeholder="Enter Product Name."/>
                                                 <span for="name" class="help-block"></span>
                                             </div>
                                         </div>

@@ -103,9 +103,9 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Check Mark</th>
+                                                    <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Category Name</th>
-                                                    <th>Product Amount</th>
+                                                    <th>Sub Product Amount</th>
                                                     <th>Product Total Price</th>
                                                 </tr>
                                                 </thead>
@@ -198,8 +198,8 @@
                                             <table class="table table-striped table-hover table-bordered" id="importProductEdit">
                                                 <thead>
                                                 <tr>
+                                                    <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Category Name</th>
                                                     <th>Product Amount</th>
                                                     <th>Product Price</th>
                                                 </tr>
@@ -255,8 +255,8 @@
                                             <th class="text-center">Serial</th>
                                             <th class="text-center">Form Branch</th>
                                             <th class="text-center">To Branch</th>
+                                            <th class="text-center">Sub Product Name</th>
                                             <th class="text-center">Product Name</th>
-                                            <th class="text-center">Category Name</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Amount</th>
                                             <th class="text-center">Price</th>

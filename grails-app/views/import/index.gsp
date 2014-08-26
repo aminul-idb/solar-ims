@@ -90,10 +90,10 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Check Mark</th>
+                                                    <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Category Name</th>
-                                                    <th>Product Amount</th>
-                                                    <th>Product Price</th>
+                                                    <th>Sub Product Amount</th>
+                                                    <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -175,10 +175,10 @@
                                             <table class="table table-striped table-hover table-bordered" id="importProductEdit">
                                                 <thead>
                                                 <tr>
+                                                    <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Category Name</th>
-                                                    <th>Product Amount</th>
-                                                    <th>Product Price</th>
+                                                    <th>Sub Product Amount</th>
+                                                    <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -230,8 +230,8 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>LC No.</th>
-                                            <th>Product Name</th>
-                                            <th>Product Amount</th>
+                                            <th>Sub Product Name</th>
+                                            <th>Sub Product Amount</th>
                                             <th>Entry Date</th>
                                             <th>Import Date</th>
                                             <th>Status</th>

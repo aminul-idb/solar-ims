@@ -201,6 +201,7 @@
                     clearForm(form);
                     var table = $('#list-table').DataTable();
                     table.ajax.reload();
+                    $("#animportCreate").toggle(500);
                     setTimeout(function() {
                         $.gritter.add({
                             title: data.message
