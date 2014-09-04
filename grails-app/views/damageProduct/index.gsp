@@ -57,7 +57,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productAmount" class="control-label">Sub Product Amount</label>
+                                                <label for="productAmount" class="control-label">Quantity</label>
                                                 <g:textField class="form-control" id="productAmount" tabindex="2"
                                                              name="productAmount" placeholder="Product Amount."/>
                                                 <span class="help-block" for="productAmount"></span>
@@ -118,7 +118,7 @@
                                         <tr>
                                             <th class="text-center">Serial</th>
                                             <th class="text-center">Sub Product Name</th>
-                                            <th class="text-center">Sub Product Amount</th>
+                                            <th class="text-center">Quantity</th>
                                             <th class="text-center">Damage Date</th>
                                             <th class="text-center">Description</th>
                                             <th class="text-center">Action</th>

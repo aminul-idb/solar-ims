@@ -45,6 +45,7 @@
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Report</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="${g.createLink(controller: 'import', action: 'importReport')}">Import Product</a></li>
+                    <li><a href="${g.createLink(controller: 'branchDistribution', action: 'branchDistributionReport')}">Branch Distribution</a></li>
                 </ul>
             </li>
 

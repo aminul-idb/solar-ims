@@ -2,14 +2,18 @@ package com.startup.inventory
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.springframework.dao.DataIntegrityViolationException
+
+import org.apache.commons.io.FileUtils
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 @Secured(['ROLE_SUPER_ADMIN'])
 class BranchDistributionController {
-
+    def jasperService
     def distributionService
 
     def index() {
@@ -157,5 +161,30 @@ class BranchDistributionController {
         outPut = result as JSON
         render outPut
         return
+    }
+
+    private static final String JASPER_FILE = 'reportInventoryBranchDistribution.jasper'
+    private static final String REPORT_FILE_FORMAT = 'pdf'
+    private static final String OUTPUT_FILE_NAME = "reportInventoryBranchDistribution.jasper"
+
+    def branchDistributionReport() {
+        if(params.submit == "report"){
+            def toDate = (params.toDate) ? Date.parse('dd/MM/yyyy', params.toDate) : null
+            def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
+            Map paramsMap = new LinkedHashMap()
+            paramsMap.put("toDate", toDate)
+            paramsMap.put("fromDate", fromDate)
+            String outputFileName = 'reportInventoryBranchDistribution.pdf'
+            JasperReportDef reportDef = new JasperReportDef(
+                    name: JASPER_FILE,
+                    fileFormat: JasperExportFormat.PDF_FORMAT,
+                    parameters: paramsMap
+            )
+
+            ByteArrayOutputStream report = jasperService.generateReport(reportDef)
+            response.contentType ='application/pdf'
+            response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
+            response.outputStream << report.toByteArray()
+        }
     }
 }

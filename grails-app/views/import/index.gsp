@@ -92,7 +92,7 @@
                                                     <th>Check Mark</th>
                                                     <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Sub Product Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
@@ -177,7 +177,7 @@
                                                 <tr>
                                                     <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Sub Product Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
@@ -231,7 +231,7 @@
                                             <th>Serial</th>
                                             <th>LC No.</th>
                                             <th>Sub Product Name</th>
-                                            <th>Sub Product Amount</th>
+                                            <th>Quantity</th>
                                             <th>Entry Date</th>
                                             <th>Import Date</th>
                                             <th>Status</th>
@@ -250,15 +250,15 @@
                                                 <td>${animated[6]}</td>
                                                 <td>
                                                     <sec:access controller="import" action="edit">
-                                                        <span class="col-xs-6"><a href=""
-                                                                                  referenceId="${animated.DT_RowId}"
+                                                        <span class="col-md-6">
+                                                            <a href="" referenceId="${animated.DT_RowId}"
                                                                                   class="edit-reference"
                                                                                   title="Edit"><span
                                                                     class="green fa fa-edit"></span>&nbsp;Edit&nbsp;</a>
                                                         </span>
                                                     </sec:access>
                                                     <sec:access controller="import" action="delete">
-                                                        <span class="col-xs-6"><a href=""
+                                                        <span class="col-md-6"><a href=""
                                                                                   referenceId="${animated.DT_RowId}"
                                                                                   class="delete-reference"
                                                                                   title="Delete"><span
@@ -492,10 +492,10 @@
 
     function getActionButtons(nRow, aData) {
         var actionButtons = "";
-        actionButtons += '<sec:access controller="import" action="edit"><span class="col-xs-6"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
+        actionButtons += '<sec:access controller="import" action="edit"><span class="col-md-6"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
         actionButtons += '<span class="green green fa fa-edit"></span>';
         actionButtons += '&nbsp;Edit&nbsp;</a></span></sec:access>';
-        actionButtons += '<sec:access controller="import" action="delete"><span class="col-xs-6"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
+        actionButtons += '<sec:access controller="import" action="delete"><span class="col-md-6"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
         actionButtons += '<span class="red green fa fa-cut"></span>';
         actionButtons += '&nbsp;Delete&nbsp;</a></span></sec:access>';
         return actionButtons;

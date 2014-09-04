@@ -215,6 +215,7 @@
                 data: $("#create-form").serialize(),
                 success: function (data) {
                     clearForm(form);
+                    $("#productNameCreate").toggle(500);
                     var table = $('#list-table').DataTable();
                     table.ajax.reload();
                     setTimeout(function() {

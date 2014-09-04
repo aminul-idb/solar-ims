@@ -14,5 +14,6 @@ class Import {
     static constraints = {
         entryDate nullable: true
         productPrice nullable: true, blank: true
+        amount nullable: true, blank: true
     }
 }

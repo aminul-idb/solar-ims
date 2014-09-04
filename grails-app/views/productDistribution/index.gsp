@@ -112,7 +112,7 @@
                                                     <th>Check Mark</th>
                                                     <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Sub Product Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
@@ -211,7 +211,7 @@
                                                 <tr>
                                                     <th>Sub Product Name</th>
                                                     <th>Product Name</th>
-                                                    <th>Sub Product Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Sub Product Price</th>
                                                 </tr>
                                                 </thead>
@@ -268,7 +268,7 @@
                                             <th class="text-center">To Customer</th>
                                             <th class="text-center">Sub Product Name</th>
                                             <th class="text-center">Product Name</th>
-                                            <th class="text-center">Amount</th>
+                                            <th class="text-center">Quantity</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Address</th>

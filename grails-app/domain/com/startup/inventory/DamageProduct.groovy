@@ -14,6 +14,7 @@ class DamageProduct {
         description nullable: true, blank: true
         entryDate nullable: true, blank: true
         status nullable: true, blank: true
+        productAmount nullable: true, blank: true
     }
 
 }

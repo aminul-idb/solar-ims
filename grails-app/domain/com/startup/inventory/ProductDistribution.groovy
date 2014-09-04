@@ -18,5 +18,6 @@ class ProductDistribution {
         address nullable: true, blank: true
         description nullable: true, blank: true
         productPrice nullable: true, blank: true
+        amount nullable: true, blank: true
     }
 }

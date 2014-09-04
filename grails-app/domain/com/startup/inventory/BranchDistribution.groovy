@@ -17,5 +17,6 @@ class BranchDistribution {
         branchUniqueId nullable: false, blank: false
         description nullable: false, blank: false
         productPrice nullable: true, blank: true
+        amount nullable: true, blank: true
     }
 }
