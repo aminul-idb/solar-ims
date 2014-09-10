@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportInventoryImport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67596504-ea08-4e1a-a5a1-d399a98f682b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="lcNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     lc_settings.`lc_no` AS lc_settings_lc_no,
+     import.`import_date` AS import_import_date,
+     category_type.`name` AS category_type_name,
+     product_item.`name` AS product_item_name,
+     import.`amount` AS import_amount
+FROM
+     `lc_settings` lc_settings INNER JOIN `import` import ON lc_settings.`id` = import.`lc_settings_id`
+     INNER JOIN `product_item` product_item ON import.`product_item_id` = product_item.`id`
+     INNER JOIN `category_type` category_type ON import.`category_type_id` = category_type.`id`
+     AND category_type.`id` = product_item.`category_type_id`
+WHERE
+     lc_settings.`lc_no` = $P{lcNo}
+ORDER BY
+     lc_settings_lc_no ASC,
+     category_type_name ASC]]>
+	</queryString>
+	<field name="lc_settings_lc_no" class="java.lang.String"/>
+	<field name="import_import_date" class="java.sql.Timestamp"/>
+	<field name="category_type_name" class="java.lang.String"/>
+	<field name="product_item_name" class="java.lang.String"/>
+	<field name="import_amount" class="java.lang.String"/>
+	<group name="lcNo">
+		<groupExpression><![CDATA[$F{lc_settings_lc_no}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement uuid="1040e6cf-12b8-4a85-9a9b-3d7e004cd002" x="118" y="0" width="30" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{lc_settings_lc_no}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4d05d5e6-7182-4915-8bdc-b12358c1b45f" x="415" y="0" width="120" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{import_import_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="c4fa795f-2032-477e-b604-e3f02b9a0ea1" x="381" y="0" width="32" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="935fd447-cad1-4baf-96e0-0ba3e922ba4d" x="48" y="0" width="69" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Lc Number :]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="catagory">
+		<groupExpression><![CDATA[$F{category_type_name}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement uuid="32fcac70-e64e-4858-815c-3bef3810c9e4" x="123" y="0" width="133" height="20"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{category_type_name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ce325c10-06a3-4398-a3bb-25cee543b2a9" x="49" y="0" width="73" height="20"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Product Name:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ef8e11a2-73d7-4d3f-92ba-2a5ad33f356d" x="196" y="32" width="163" height="25"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Import Product List]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement uuid="20ffe704-ae0c-4095-8487-3a4fd1cc6170" x="156" y="20" width="126" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{product_item_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="098d66b7-e3f7-40f1-85a0-64406ab82ed5" x="340" y="20" width="93" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{import_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a9437fa8-b80e-4496-8349-f6e9d259fae7" x="110" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Sub Product Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db84b30a-0dce-46b3-a84a-8cc0a11e5c6c" x="283" y="20" width="21" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[---------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4134c2ea-2221-4fca-bcff-0f6db4e5b58b" x="320" y="0" width="51" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

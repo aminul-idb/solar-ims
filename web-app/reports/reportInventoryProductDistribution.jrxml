@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportInventoryProductDistribution" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cce544d0-ebf0-498e-9c4d-cdd453aa0b50">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="44"/>
+	<parameter name="toDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fromDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="categoryType" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="productItem" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     category_type.`name` AS category_type_name,
+     product_item.`name` AS product_item_name,
+     product_distribution.`address` AS product_distribution_address,
+     product_distribution.`amount` AS product_distribution_amount,
+     product_distribution.`distribution_date` AS product_distribution_distribution_date,
+     product_distribution.`from_branch` AS product_distribution_from_branch,
+     product_distribution.`product_price` AS product_distribution_product_price,
+     product_distribution.`to_customer` AS product_distribution_to_customer,
+     product_distribution.`status` AS product_distribution_status
+FROM
+     `category_type` category_type INNER JOIN `product_item` product_item ON category_type.`id` = product_item.`category_type_id`
+     INNER JOIN `product_distribution` product_distribution ON product_item.`id` = product_distribution.`product_item_id`
+     AND category_type.`id` = product_distribution.`category_type_id`
+
+WHERE product_distribution.`status`="ACTIVE" AND ((distribution_date BETWEEN $P{toDate} AND $P{fromDate}) AND (IF($P{categoryType} IS NOT NULL ,category_type.`id` = $P{categoryType} , category_type.`id`)) AND (IF($P{productItem} IS NOT NULL ,product_item.`id` = $P{productItem} , product_item.`id`)))]]>
+	</queryString>
+	<field name="category_type_name" class="java.lang.String"/>
+	<field name="product_item_name" class="java.lang.String"/>
+	<field name="product_distribution_address" class="java.lang.String"/>
+	<field name="product_distribution_amount" class="java.lang.String"/>
+	<field name="product_distribution_distribution_date" class="java.sql.Timestamp"/>
+	<field name="product_distribution_from_branch" class="java.lang.String"/>
+	<field name="product_distribution_product_price" class="java.lang.String"/>
+	<field name="product_distribution_to_customer" class="java.lang.String"/>
+	<field name="product_distribution_status" class="java.lang.String"/>
+	<group name="to date group">
+		<groupHeader>
+			<band height="64">
+				<staticText>
+					<reportElement uuid="68404a20-d1b5-4971-9270-ac32282886ce" x="0" y="0" width="39" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="d1560bc9-f26c-43fd-abf3-1b66886152ba" x="39" y="0" width="54" height="20"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{product_distribution_distribution_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ffee2e93-5cac-4419-9e02-3513bd6b0f56" x="306" y="44" width="78" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[To Customer]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="38ba182f-db0a-47ed-a599-fd47c02ca3a4" x="0" y="44" width="84" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Product Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="20061784-4fce-463d-8f59-99df835ad465" x="211" y="44" width="87" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Form Branch]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a82e7abb-34fd-4057-a587-58a480dd4f49" x="521" y="44" width="34" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Price]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="da08bbe2-4890-424a-a00e-84d624d9962b" x="462" y="44" width="49" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Quantity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9d5c42be-7965-43bc-90eb-b46f93fb804e" x="92" y="44" width="111" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Sub Product Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4ab8aaf0-3a13-4660-a26c-d8bd46a37806" x="392" y="44" width="59" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Address]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0f8f2480-2396-4bf6-b100-35276354730f" x="196" y="3" width="163" height="25"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Distribution]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement uuid="542c18b9-d95d-4ff7-85ec-a2cf3c8e557b" x="0" y="0" width="84" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{category_type_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="775256a1-13d9-4fef-a6ea-31bb8ed25b49" x="95" y="0" width="108" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_item_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ea32c2b-605a-474e-915e-993a62dfe36c" x="394" y="0" width="56" height="36"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_distribution_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7678e3ee-7773-4de7-935a-405961a84ac0" x="462" y="0" width="49" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_distribution_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2d44271b-779d-404f-83b7-5b8121e212e5" x="306" y="0" width="78" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_distribution_to_customer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="11bb75d5-475c-49d1-82dc-0bd8d28cdb0c" x="523" y="0" width="32" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_distribution_product_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33c1ccee-7ba9-4620-9f42-7419adbdeb4b" x="211" y="0" width="87" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_distribution_from_branch}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
