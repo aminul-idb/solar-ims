@@ -2,12 +2,14 @@ package com.startup.inventory
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.springframework.dao.DataIntegrityViolationException
 
 
 @Secured(['ROLE_SUPER_ADMIN'])
 class ProductDistributionController {
-
+    def jasperService
     def productDistributionService
 
     def index() {
@@ -76,10 +78,10 @@ class ProductDistributionController {
         }
 
         // save
-        def productItemList = params.productItemId
-        def amountList = params.amount
-        def productPriceList = params.productPrice
-        def productCheckList = params.productCheck
+        def productItemList = Arrays.asList(params.productItemId)
+        def amountList = Arrays.asList(params.amount)
+        def productPriceList = Arrays.asList(params.productPrice)
+        def productCheckList = Arrays.asList(params.productCheck)
 
         for (int i = 0; i < productItemList.length; i++) {
             ProductDistribution productDistribution = new ProductDistribution()
@@ -188,6 +190,52 @@ class ProductDistributionController {
             result.put('resultList', resultList)
             def outPut = result as JSON
             render outPut
+        }
+    }
+
+    private static final String JASPER_FILE = 'reportInventoryProductDistribution.jasper'
+    private static final String REPORT_FILE_FORMAT = 'pdf'
+    private static final String OUTPUT_FILE_NAME = "reportInventoryProductDistribution.jasper"
+
+    def productDistributionReport() {
+        if(params.submit == "report"){
+
+            Map paramsMap = new LinkedHashMap()
+            if(params.toDate){
+                def toDate = (params.toDate) ? Date.parse('dd/MM/yyyy', params.toDate) : null
+                paramsMap.put("toDate", toDate)
+            }
+
+            if(params.fromDate){
+                def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
+                paramsMap.put("fromDate", fromDate)
+            }
+
+            if(params.categoryType){
+                def categoryType = params.categoryType as Long
+                paramsMap.put("categoryType", categoryType)
+            }
+
+            if(params.productItem){
+                def productItem = params.productItem as Long
+                paramsMap.put("productItem", productItem)
+            }
+
+            //def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
+            //Map paramsMap = new LinkedHashMap()
+            //paramsMap.put("toDate", toDate)
+            //paramsMap.put("fromDate", fromDate)
+            String outputFileName = 'reportInventoryProductDistribution.pdf'
+            JasperReportDef reportDef = new JasperReportDef(
+                    name: JASPER_FILE,
+                    fileFormat: JasperExportFormat.PDF_FORMAT,
+                    parameters: paramsMap
+            )
+
+            ByteArrayOutputStream report = jasperService.generateReport(reportDef)
+            response.contentType ='application/pdf'
+            response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
+            response.outputStream << report.toByteArray()
         }
     }
 }

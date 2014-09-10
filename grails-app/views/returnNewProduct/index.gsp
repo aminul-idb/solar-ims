@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Return New Product</title>
+    <title>Return Product</title>
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
     <asset:javascript src="bootstrap-datepicker.min.js"/>
@@ -14,7 +14,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 
     <div class="col-lg-8">
-        <h2>Return New Product</h2>
+        <h2>Return Product</h2>
     </div>
 
     <div class="col-lg-4">
@@ -46,7 +46,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productItem" class="control-label">Sub Product Name</label>
+                                                <label for="productItem" class="control-label">Category Name</label>
                                                 <g:select class="form-control" id="productItem" name='productItem'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${ProductItem.list()}'
@@ -59,7 +59,7 @@
                                             <div class="col-md-12">
                                                 <label for="productAmount" class="control-label">Quantity</label>
                                                 <g:textField class="form-control" id="productAmount" tabindex="2"
-                                                             name="productAmount" placeholder="Product Amount."/>
+                                                             name="productAmount" placeholder="Quantity."/>
                                                 <span class="help-block" for="productAmount"></span>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                                             <div class="col-md-12">
                                                 <label for="datepicker" class="control-label ">Date</label>
                                                 <input type="text" class="form-control datepicker" id="datepicker"
-                                                       name="returnNewDate" placeholder="Enter Damage Date."/>
+                                                       name="returnNewDate" placeholder="Enter Date."/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Product Description</label>
+                                                <label for="description" class="control-label">Description</label>
                                                 <g:textField class="form-control" id="description" tabindex="2"
                                                              name="description" placeholder="Enter Description."/>
                                                 <span class="help-block" for="description"></span>
@@ -117,7 +117,7 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">Sub Product Name</th>
+                                            <th class="text-center">Category Name</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Description</th>
@@ -180,21 +180,25 @@
         errorClass: 'help-block',
         focusInvalid: false,
         rules: {
-            name: {
-                required: true,
-                minlength: 2
+            productItem: {
+                required: true
             },
-            description: {
-                maxlength: 200
+            productAmount: {
+                required: true
             },
-            status: {
+            returnNewDate: {
                 required: true
             }
         },
         messages: {
-            name: {
-                required: "Please provide a Name",
-                minlength: "Name must be at least 2 characters long"
+            productItem: {
+                required: " "
+            },
+            productAmount: {
+                required: " "
+            },
+            returnNewDate: {
+                required: " "
             }
         },
         invalidHandler: function (event, validator) {
@@ -233,7 +237,7 @@
 
     jQuery(function ($) {
         var oTable1 = $('#list-table').dataTable({
-//        "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
+            "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
@@ -246,6 +250,8 @@
                 $('td:eq(5)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,
@@ -307,6 +313,8 @@
                     success: function (data, textStatus) {
                         if (data.isError == false) {
                             $("#list-table").DataTable().row(selectRow).remove().draw();
+                            var table = $('#list-table').DataTable();
+                            table.ajax.reload();
                         } else {
                             setTimeout(function() {
                                 $.gritter.add({

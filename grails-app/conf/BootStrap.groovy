@@ -16,10 +16,10 @@ class BootStrap {
     }
 
     void createCategory(){
-        CategoryType.findByName('Battery')?:new CategoryType(name: 'Battery',description: 'Battery only', status:Status.ACTIVE).save()
-        CategoryType.findByName('Solar Panel')?:new CategoryType(name: 'Solar Panel',description: 'Solar Panel only', status:Status.ACTIVE).save()
-        CategoryType.findByName('Bulb')?:new CategoryType(name: 'Bulb',description: 'Bulb only', status:Status.ACTIVE).save()
-        CategoryType.findByName('Cable')?:new CategoryType(name: 'Cable',description: 'Cable only', status:Status.ACTIVE).save(flush: true)
+        CategoryType.findByName('Battery')?:new CategoryType(name: 'Battery',description: 'Battery only', status:Status.ACTIVE, priority:1).save()
+        CategoryType.findByName('Solar Panel')?:new CategoryType(name: 'Solar Panel',description: 'Solar Panel only', status:Status.ACTIVE, priority:2).save()
+        CategoryType.findByName('Bulb')?:new CategoryType(name: 'Bulb',description: 'Bulb only', status:Status.ACTIVE, priority:3).save()
+        CategoryType.findByName('Cable')?:new CategoryType(name: 'Cable',description: 'Cable only', status:Status.ACTIVE, priority:4).save(flush: true)
     }
 
     void createItem(){

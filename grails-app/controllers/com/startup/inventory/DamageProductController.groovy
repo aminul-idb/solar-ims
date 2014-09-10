@@ -64,7 +64,7 @@ class DamageProductController {
             render result as JSON
             return
         }
-        def result = [isError: true, obj: damageProduct, product: damageProduct.productItem ]
+        def result = [isError: false, obj: damageProduct, product: damageProduct.productItem ]
         render result as JSON
     }
 
@@ -75,13 +75,13 @@ class DamageProductController {
             return
         }
         DamageProduct damageProduct = DamageProduct.get(id)
-        if (damageProduct) {
+        if (!damageProduct) {
             def result = [isError: true, message: "Damage Product name not found!!"]
             render result as JSON
             return
         }
         damageProduct.delete(flush: true)
-        def result = [isError: true, message: "Damage Product deleted successfully!!"]
+        def result = [isError: false, message: "Damage Product deleted successfully!!"]
         render result as JSON
     }
 

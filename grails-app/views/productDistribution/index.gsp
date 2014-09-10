@@ -47,7 +47,7 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="fromBranch" class="control-label">From</label>
+                                                <label for="fromBranch" class="control-label">To Branch</label>
                                                 <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Branch.values()}'
@@ -69,7 +69,7 @@
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Address</label>
                                                 <g:textField class="form-control address" id="address"
-                                                             name="address" placeholder="Enter Customer Name."/>
+                                                             name="address" placeholder="Enter Address."/>
                                                 <span class="help-block" for="address"></span>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="datepicker" class="control-label ">Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepicker"
+                                                <input type="text" required="required" class="form-control datepicker" id="datepicker"
                                                        name="distributionDate" placeholder="Enter distribution Date."/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
@@ -97,7 +97,6 @@
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control status" id="status" name='status'
-                                                          noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Status.values()}'
                                                           optionKey="key" optionValue="value"></g:select>
                                                 <span class="help-block" for="status"></span>
@@ -110,10 +109,10 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Check Mark</th>
-                                                    <th>Sub Product Name</th>
-                                                    <th>Product Name</th>
+                                                    <th>Category</th>
+                                                    <th>Product</th>
                                                     <th>Quantity</th>
-                                                    <th>Sub Product Price</th>
+                                                    <th>Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -197,7 +196,6 @@
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control status" id="status" name='status'
-                                                          noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Status.values()}'
                                                           optionKey="key" optionValue="value"></g:select>
                                                 <span class="help-block" for="status"></span>
@@ -209,10 +207,10 @@
                                             <table class="table table-striped table-hover table-bordered" id="importProductEdit">
                                                 <thead>
                                                 <tr>
-                                                    <th>Sub Product Name</th>
-                                                    <th>Product Name</th>
+                                                    <th>Category</th>
+                                                    <th>Product</th>
                                                     <th>Quantity</th>
-                                                    <th>Sub Product Price</th>
+                                                    <th>Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -264,10 +262,10 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">Form Branch</th>
-                                            <th class="text-center">To Customer</th>
-                                            <th class="text-center">Sub Product Name</th>
-                                            <th class="text-center">Product Name</th>
+                                            <th class="text-center">To Branch</th>
+                                            <th class="text-center">From Customer</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Product</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Status</th>
@@ -281,7 +279,7 @@
                                                 <td>${animated[0]}</td>
                                                 <td>${animated[1]}</td>
                                                 <td>${animated[2]}</td>
-                                                <td>${animated[3]}</td>
+                                                <td class="bigFont">${animated[3]}</td>
                                                 <td>${animated[4]}</td>
                                                 <td>${animated[5]}</td>
                                                 <td>${animated[6]}</td>
@@ -327,26 +325,37 @@
 
         //$('#edit-form-product').hide();
         $('#create-form-product').validate({
-            errorElement: 'label',
+            errorElement: 'small',
             errorClass: 'help-block',
             focusInvalid: false,
             rules: {
-                name: {
-                    required: true,
-                    minlength: 2
+                fromBranch: {
+                    required: true
                 },
-                description: {
-                    maxlength: 200
+                toCustomer: {
+                    required: true
                 },
-                status: {
+                address: {
+                    required: true
+                },
+                datepicker: {
                     required: true
                 }
             },
             messages: {
-                name: {
-                    required: "Please provide LC",
-                    minlength: "LC must be at least 2 characters long"
+                fromBranch: {
+                    required: " "
+                },
+                toCustomer: {
+                    required: " "
+                },
+                address: {
+                    required: " "
+                },
+                datepicker: {
+                    required: " "
                 }
+
             },
             invalidHandler: function (event, validator) {
                 $('.alert-danger', $('#currencyForm')).show();
@@ -394,7 +403,7 @@
 
 
         var oTable1 = $('#list-table').dataTable({
-            "sDom": " ", //<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>
+            "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
@@ -404,9 +413,12 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
+                $('td:eq(4)', nRow).addClass('bigFont');
                 $('td:eq(9)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,
@@ -422,7 +434,7 @@
             ]
         });
 
-        var oTable2 = $('#productList-table').dataTable({
+        /*var oTable2 = $('#productList-table').dataTable({
             "sDom": " ",
             aoColumns: [
                 { "bSortable": false },
@@ -431,15 +443,13 @@
                 { "bSortable": false },
                 { "bSortable": false }
             ]
-        });
+        });*/
 
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);
             $( "#create-form-product" )[ 0 ].reset();
             $('#create-form-product').show();
             $('#edit-form-product').hide();
-
-
             e.preventDefault();
         });
 

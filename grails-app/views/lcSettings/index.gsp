@@ -44,8 +44,9 @@
                                 <div class="form">
                                     <form class="cmxform form-horizontal " id="create-form">
                                         <g:hiddenField name="id"/>
+                                        <input type="hidden" name="edit" value="" id="edit" />
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="lcNo" class="control-label">LC No.</label>
                                                 <g:textField class="form-control" id="lcNo" tabindex="1" name="lcNo"
@@ -54,7 +55,16 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
+                                            <div class="col-md-12">
+                                                <label for="datepicker" class="control-label">LC Date</label>
+                                                <input type="text" required="required" class="form-control datepicker" id="datepicker"
+                                                       name="lcDate" placeholder="Enter LC Date."/>
+                                                <span class="help-block" for="datepicker"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Lc Description</label>
                                                 <g:textField class="form-control" id="description"
@@ -63,7 +73,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
@@ -109,6 +119,7 @@
                                             <th class="text-center">Serial</th>
                                             <th class="text-center">LC No</th>
                                             <th class="text-center">LC Description</th>
+                                            <th class="text-center">Date</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
@@ -120,6 +131,7 @@
                                                 <td>${animated[1]}</td>
                                                 <td>${animated[2]}</td>
                                                 <td>${animated[3]}</td>
+                                                <td>${animated[4]}</td>
                                                 <td>
                                                     <sec:access controller="import" action="edit">
                                                         <span class="col-xs-6"><a href=""
@@ -158,25 +170,23 @@
 
 
     $('#create-form').validate({
-        errorElement: 'label',
+        errorElement: 'small',
         errorClass: 'help-block',
         focusInvalid: false,
         rules: {
-            name: {
-                required: true,
-                minlength: 2
+            lcNo: {
+                required: true
             },
-            description: {
-                maxlength: 200
-            },
-            status: {
+            lcDate: {
                 required: true
             }
         },
         messages: {
-            name: {
-                required: "Please provide LC",
-                minlength: "LC must be at least 2 characters long"
+            lcNo: {
+                required: " "
+            },
+            lcDate: {
+                required: " "
             }
         },
         invalidHandler: function (event, validator) {
@@ -222,7 +232,6 @@
             autoclose: true
         });
 
-
         var oTable1 = $('#list-table').dataTable({
             "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
@@ -234,14 +243,15 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
-                $('td:eq(4)', nRow).html(getActionButtons(nRow, aData));
+                $('td:eq(5)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
             "aoColumns": [
+                {"sClass": "center", "sWidth": "10%", "bSortable": true },
                 {"sClass": "center", "sWidth": "15%", "bSortable": true },
-                {"sClass": "center", "sWidth": "20%", "bSortable": true },
                 {"sClass": "center", "sWidth": "20%", "bSortable": false },
-                {"sClass": "center", "sWidth": "20%", "bSortable": false },
+                {"sClass": "center", "sWidth": "15%", "bSortable": false },
+                {"sClass": "center", "sWidth": "15%", "bSortable": false },
                 {"sClass": "center", "sWidth": "20%", "bSortable": false }
 
             ]
@@ -265,8 +275,9 @@
                         clearForm('#create-form');
                         $('#id').val(data.obj.id);
                         $('#lcNo').val(data.obj.lcNo);
+                        $('#edit').val("edit");
                         //$('#productItem').val(data.obj.productItem.id);
-                        /*$('#datepicker').datepicker('setDate', new Date(data.obj.importDate));*/
+                        $('#datepicker').datepicker('setDate', new Date(data.obj.lcDate));
                         $('#description').val(data.obj.description);
                         $('#status').val(data.obj.status ? data.obj.status.name :'');
                         $("#animportCreate").show(500);

@@ -66,20 +66,27 @@ class ImportController {
             return
         }
 
-        // save
-        def productItemList = params.productItemId
-        def amountList = params.amount
-        def productPriceList = params.productPrice
-        def productCheckList = params.productCheck
+//        print(params.productItemId)
+//        def productItem = Arrays.asList(params.productItemId)
+//        print("productItem >> "+ productItem)
+//        if (productItem.size())
 
-        for(int i=0; i<productItemList.length; i++){
+        // save
+        def productItemList = Arrays.asList(params.productItemId)
+        def amountList = Arrays.asList(params.amount)
+        def productPriceList = Arrays.asList(params.productPrice)
+        def productCheckList = Arrays.asList(params.productCheck)
+        def lcNo = LcSettings.get(params.lcSettings as Long)
+
+        for(int i=0; i<productItemList.size(); i++){
             Import anImport = new Import()
             if ( (amountList[i] != '') && (productItemList[i] in productCheckList == true)  ){
-                anImport.importDate = Date.parse('dd/MM/yyyy', params.importDate)
+//                anImport.importDate = Date.parse('dd/MM/yyyy', lcNo.lcDate)
                 anImport.amount = amountList[i] as String
                 anImport.productPrice = productPriceList[i] as String
                 anImport.status = params.status
-                anImport.lcSettings = LcSettings.get(params.lcSettings as Long)
+                anImport.lcSettings = lcNo
+                anImport.importDate = lcNo.lcDate
                 anImport.productItem = ProductItem.get(productItemList[i] as Long)
                 anImport.categoryType = anImport.productItem.categoryType
                 Import importSaved = anImport.save(flush:true)
@@ -118,13 +125,13 @@ class ImportController {
             return
         }
         Import anImport = Import.get(id)
-        if (anImport) {
+        if (!anImport) {
             def result = [isError: true, message: "Import name not found!"]
             render result as JSON
             return
         }
         anImport.delete(flush: true)
-        def result = [isError: true, message: "Import deleted successfully!"]
+        def result = [isError: false, message: "Import deleted successfully!"]
         render result as JSON
     }
 
@@ -150,7 +157,6 @@ class ImportController {
                     }
                 }
             }
-
             def resultList = []
             for (int i=0; i<results.size(); i++){
                 def result = [
@@ -158,9 +164,10 @@ class ImportController {
                         results.productItem.name[i],
                         results.amount[i],
                         results.entryDate[i].format('dd/MM/yyyy'),
-                        results.importDate[i].format('dd/MM/yyyy'),
+                        //results.importDate[i].format('dd/MM/yyyy'),
                         results.categoryType.name[i]
                 ]
+                print("??" + results.categoryType.name[0])
                 resultList << result
             }
 

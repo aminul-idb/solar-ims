@@ -31,8 +31,7 @@ class LcSettingsService {
         int totalCount = results.totalCount
 
         int serial = iDisplayStart;
-        String entryDateStr
-        String importDateStr
+        String lcDate
         if (totalCount > 0) {
             if (sSortDir.equals(CommonUtils.SORT_ORDER_DESC)) {
                 serial = (totalCount + 1) - iDisplayStart
@@ -43,9 +42,8 @@ class LcSettingsService {
                 } else {
                     serial--
                 }
-                //entryDateStr =anImport.entryDate? CommonUtils.getUiDateStr(anImport.entryDate):''
-                //importDateStr =anImport.importDate? CommonUtils.getUiDateStr(anImport.importDate):''
-                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcNo, 2: anImport.description, 3:anImport.status.value, 4:''])
+                lcDate =anImport.lcDate? CommonUtils.getUiDateStr(anImport.lcDate):''
+                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcNo, 2: anImport.description,3: lcDate, 4:anImport.status.value, 5:''])
             }
         }
         return [totalCount:totalCount,results:dataReturns]

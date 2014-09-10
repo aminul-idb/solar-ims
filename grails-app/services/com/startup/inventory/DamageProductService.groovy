@@ -42,7 +42,7 @@ class DamageProductService {
                     serial--
                 }
                 damageDate = damageProduct.damageDate? CommonUtils.getUiDateStr(damageProduct.damageDate):''
-                dataReturns.add([DT_RowId: damageProduct.id, 0: serial, 1: damageProduct.productItem.name, 2:damageProduct.productAmount, 3: damageDate, 4: damageProduct.description, 5: ''])
+                dataReturns.add([DT_RowId: damageProduct.id, 0: serial, 1: damageProduct.productItem.name, 2:damageProduct.productAmount, 3: damageDate, 4: damageProduct.description, 5: damageProduct.returnFrom, 6: ''])
             }
         }
         return [totalCount:totalCount,results:dataReturns]

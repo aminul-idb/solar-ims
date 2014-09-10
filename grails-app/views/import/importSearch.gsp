@@ -37,7 +37,7 @@
                                                 <label for="lcSettings" class="control-label">LC No.</label>
 
                                                 <select name="lcNo" id="lcSettings" class="form-control lcSettings">
-                                                    <option value="">Select Lc</option>
+                                                    <option value="">Select Lc No.</option>
                                                     <g:each in="${com.startup.inventory.LcSettings.list()}" var="lcSettings" >
                                                         <option value="${lcSettings.id}">${lcSettings.lcNo}</option>
                                                     </g:each>
@@ -65,9 +65,9 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="categoryType" class="control-label">Category</label>
+                                                <label for="categoryType" class="control-label">Product</label>
                                                 <select name="categoryType" id="categoryType" class="form-control lcSettings">
-                                                    <option value="">Select Lc</option>
+                                                    <option value="">Select Product</option>
                                                     <g:each in="${com.startup.inventory.CategoryType.list(sort: 'name')}" var="categoryType" >
                                                         <option value="${categoryType?.id}">${categoryType.name}</option>
                                                     </g:each>
@@ -78,9 +78,9 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productItem" class=" control-label">Product Name </label><br>
+                                                <label for="productItem" class=" control-label">Category</label><br>
                                                 <select name="productItem" id="productItem" class="form-control productItem">
-                                                    <option value="">Select Product</option>
+                                                    <option value="">Select Category</option>
                                                     <g:each in="${com.startup.inventory.ProductItem.list(sort: 'categoryType')}" var="productItem" >
                                                         <option value="${productItem?.id}">${productItem?.name}</option>
                                                     </g:each>
@@ -125,11 +125,10 @@
                                         <thead>
                                         <tr>
                                             <th>LC No.</th>
-                                            <th>Product Name</th>
+                                            <th>Category</th>
                                             <th>Product Amount</th>
                                             <th>Entry Date</th>
-                                            <th>Import Date</th>
-                                            <th>Category</th>
+                                            <th>Product</th>
                                         </tr>
                                         </thead>
                                         <tbody id="importProductDiv">
@@ -206,7 +205,6 @@
                             html += "<td>"+data.resultList[i][2]+"</td>";
                             html += "<td>"+data.resultList[i][3]+"</td>";
                             html += "<td>"+data.resultList[i][4]+"</td>";
-                            html += "<td>"+data.resultList[i][5]+"</td>";
                             html += "</tr>";
                             $('tbody#importProductDiv').append(html);
                         }

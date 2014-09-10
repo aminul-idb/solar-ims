@@ -62,12 +62,23 @@ class LcSettingsController {
         }
 
         LcSettings lcSettingsSaved =  lcSettings.save(flush: true)
+        if (params.edit == "edit"){
+            def anImport = Import.findAllByLcSettings(lcSettingsSaved)
+            for (def i=0; i<anImport.size(); i++){
+                def importUpdate = Import.get(anImport.id[i])
+                importUpdate.importDate = lcSettings.lcDate
+                importUpdate.save(flush: true)
+            }
+        }
+
+
+
         if(!lcSettingsSaved){
             def result = [isError: true, message: "LC failed save!!"]
             render result as JSON
             return
         }
-        def result = [isError: true, message: "LC Added successfully!"]
+        def result = [isError: false, message: "LC Added successfully!"]
         render result as JSON
     }
 

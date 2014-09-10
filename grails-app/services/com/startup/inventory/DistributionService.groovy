@@ -42,7 +42,7 @@ class DistributionService {
                         serial--
                     }
                     bdDate =branchDistribution.distributionDate? CommonUtils.getUiDateStr(branchDistribution.distributionDate):''
-                    dataReturns.add([DT_RowId: branchDistribution.id, 0: serial, 1: branchDistribution.fromBranch, 2:branchDistribution.toBranch, 3:branchDistribution.productItem.name, 4:branchDistribution.productItem.categoryType.name, 5:bdDate, 6:branchDistribution.amount, 7:branchDistribution.productPrice,  8:branchDistribution.status.value, 9:''])
+                    dataReturns.add([DT_RowId: branchDistribution.id, 0: serial, 1: branchDistribution.toBranch, 2:branchDistribution.fromBranch, 3:branchDistribution.productItem.name, 4:branchDistribution.productItem.categoryType.name, 5:bdDate, 6:branchDistribution.amount, 7:branchDistribution.productPrice,  8:branchDistribution.status.value, 9:''])
                 }
             }
             return [totalCount:totalCount,results:dataReturns]

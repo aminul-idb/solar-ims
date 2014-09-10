@@ -105,9 +105,8 @@ class CategoryTypeController {
         }
 
         categoryType.delete(flush: true)
-        def result = [isError: true, message: "Category deleted successfully!!"]
+        def result = [isError: false, message: "Category deleted successfully!!"]
         render result as JSON
-        return
     }
 }
 

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Create Product</title>
+    <title>Create Category</title>
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
 
@@ -14,7 +14,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 
     <div class="col-lg-8">
-        <h2>Create Sub Product</h2>
+        <h2>Create Category</h2>
     </div>
 
     <div class="col-lg-4">
@@ -46,16 +46,16 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="name" class="control-label">Sub Product Name</label>
+                                                <label for="name" class="control-label">Category</label>
                                                 <g:textField class="form-control" id="name" tabindex="1" name="name"
                                                              placeholder="Enter Product Name."/>
-                                                <span for="name" class="help-block"></span>
+                                                <span class="help-block" for="name"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Product Description</label>
+                                                <label for="description" class="control-label">Category Description</label>
                                                 <g:textField class="form-control" id="description" tabindex="2"
                                                              name="description" placeholder="Enter Description."/>
                                                 <span class="help-block" for="description"></span>
@@ -66,7 +66,7 @@
                                             <div class="col-md-12">
                                                 <label for="categoryType" class=" control-label">Product</label><br>
                                                 <g:select class="form-control" id="categoryType" name='categoryType'
-                                                          noSelection="${['': 'Select One...']}"
+                                                          noSelection="${['': 'Select Product...']}"
                                                           from='${CategoryType.list()}'
                                                           optionKey="id" optionValue="name"></g:select>
                                                 <span class="help-block" for="productItem"></span>
@@ -77,7 +77,6 @@
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
-                                                          noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Status.values()}'
                                                           optionKey="key" optionValue="value"></g:select>
                                                 <span class="help-block" for="status"></span>
@@ -129,7 +128,7 @@
                                         <g:each in="${dataReturn}" var="productItem">
                                             <tr>
                                                 <td>${productItem[0]}</td>
-                                                <td>${productItem[1]}</td>
+                                                <td class="bigFont">${productItem[1]}</td>
                                                 <td>${productItem[2]}</td>
                                                 <td>${productItem[3]}</td>
                                                 <td>${productItem[4]}</td>
@@ -171,28 +170,24 @@
 
 
     $('#create-form').validate({
-        errorElement: 'label',
+        errorElement: 'small',
         errorClass: 'help-block',
         focusInvalid: false,
         rules: {
             name: {
-                required: true,
-                minlength: 2
-            },
-            description: {
-                maxlength: 200
-            },
-            status: {
                 required: true
             },
-            subCat: {
+            categoryType: {
                 required: true
             }
+
         },
         messages: {
             name: {
-                required: "Please provide a Name",
-                minlength: "Name must be at least 2 characters long"
+                required: "Please provide a Name"
+            },
+            categoryType: {
+                required: "Select Product Name"
             }
         },
         invalidHandler: function (event, validator) {
@@ -232,7 +227,7 @@
 
     jQuery(function ($) {
         var oTable1 = $('#list-table').dataTable({
-//        "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
+        "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
@@ -242,9 +237,12 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
+                $('td:eq(1)', nRow).addClass('bigFont');
                 $('td:eq(5)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,

@@ -5,7 +5,9 @@
 
                 <div class="dropdown profile-element"> <span>
                     %{--<img alt="image" class="img-circle" src="img/profile_small.jpg">--}%
-                    <asset:image src="abc.jpg" class="img-thumbnail img-responsive" alt="image"/>
+                    <a href="${createLink(controller: 'home')}">
+                        <asset:image src="abc.jpg" class="img-thumbnail img-responsive" alt="image"/>
+                    </a>
                     </span>
                     <br>
 
@@ -17,7 +19,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="${g.createLink(controller: 'categoryType',action: 'index')}">Product</a></li>
                     %{--<li><a href="${g.createLink(controller: 'subCat',action: 'index')}">Add Sub Category</a></li>--}%
-                    <li><a href="${g.createLink(controller: 'productItem',action: 'index')}">Sub Product</a></li>
+                    <li><a href="${g.createLink(controller: 'productItem',action: 'index')}">Category</a></li>
                 </ul>
             </li>
 
@@ -29,7 +31,7 @@
                     <li><a href="${g.createLink(controller: 'branchDistribution', action: 'index')}">Branch distribution</a></li>
                     <li><a href="${g.createLink(controller: 'productDistribution', action: 'index')}">Product Distribution</a></li>
                     <li><a href="${g.createLink(controller: 'damageProduct', action: 'index')}">Damage Product</a></li>
-                    <li><a href="${g.createLink(controller: 'returnNewProduct', action: 'index')}">Return New Product</a></li>
+                    <li><a href="${g.createLink(controller: 'returnNewProduct', action: 'index')}">Return Product</a></li>
                 </ul>
             </li>
 
@@ -46,6 +48,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="${g.createLink(controller: 'import', action: 'importReport')}">Import Product</a></li>
                     <li><a href="${g.createLink(controller: 'branchDistribution', action: 'branchDistributionReport')}">Branch Distribution</a></li>
+                    <li><a href="${g.createLink(controller: 'productDistribution', action: 'productDistributionReport')}">Product Distribution</a></li>
                 </ul>
             </li>
 

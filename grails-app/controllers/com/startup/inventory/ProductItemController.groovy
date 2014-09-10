@@ -101,9 +101,8 @@ class ProductItemController {
         }
 
         productItem.delete(flush: true)
-        def result = [isError: true, message: "Product deleted successfully!"]
+        def result = [isError: false, message: "Product deleted successfully!"]
         render result as JSON
-        return
     }
 }
 

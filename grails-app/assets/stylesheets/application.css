@@ -14,3 +14,8 @@
 *= require_self
 */
 
+.bigFont{
+    font-size: 14px;
+    font-weight: bold;
+}
+

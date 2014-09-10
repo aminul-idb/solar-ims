@@ -8,7 +8,7 @@ import java.lang.reflect.Array
 class CommonUtils {
 
     public static final int DEFAULT_PAGINATION_START =0
-    public static final int DEFAULT_PAGINATION_LENGTH =25
+    public static final int DEFAULT_PAGINATION_LENGTH =100
     public static final String DEFAULT_PAGINATION_SORT_ORDER ='desc'
     public static final String DEFAULT_PAGINATION_SORT_COLUMN ='id'
     public static final int DEFAULT_PAGINATION_SORT_IDX =0

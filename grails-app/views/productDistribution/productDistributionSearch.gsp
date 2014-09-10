@@ -72,9 +72,9 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="categoryType" class="control-label">Category</label>
+                                                <label for="categoryType" class="control-label">Product</label>
                                                 <select name="categoryType" id="categoryType" class="form-control lcSettings">
-                                                    <option value="">Select Lc</option>
+                                                    <option value="">Select Product</option>
                                                     <g:each in="${com.startup.inventory.CategoryType.list(sort: 'name')}" var="categoryType" >
                                                         <option value="${categoryType?.id}">${categoryType.name}</option>
                                                     </g:each>
@@ -85,9 +85,9 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productItem" class=" control-label">Product Name </label><br>
+                                                <label for="productItem" class=" control-label">Category Name</label><br>
                                                 <select name="productItem" id="productItem" class="form-control productItem">
-                                                    <option value="">Select Product</option>
+                                                    <option value="">Select Category</option>
                                                     <g:each in="${com.startup.inventory.ProductItem.list(sort: 'categoryType')}" var="productItem" >
                                                         <option value="${productItem?.id}">${productItem?.name}</option>
                                                     </g:each>

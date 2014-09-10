@@ -44,7 +44,7 @@ class ImportService {
                 }
                 entryDateStr =anImport.entryDate? CommonUtils.getUiDateStr(anImport.entryDate):''
                 importDateStr =anImport.importDate? CommonUtils.getUiDateStr(anImport.importDate):''
-                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcSettings.lcNo,2:anImport.productItem.name, 3:anImport.amount, 4:entryDateStr, 5:importDateStr, 6:anImport.status.value, 7:''])
+                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcSettings.lcNo,2:anImport.productItem.name, 3:anImport.amount, 4:entryDateStr, 5:anImport.status.value, 6:''])
             }
         }
         return [totalCount:totalCount,results:dataReturns]

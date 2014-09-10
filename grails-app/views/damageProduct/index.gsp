@@ -46,7 +46,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="productItem" class="control-label">Sub Product Name</label>
+                                                <label for="productItem" class="control-label">Category Name</label>
                                                 <g:select class="form-control" id="productItem" name='productItem'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${ProductItem.list()}'
@@ -57,28 +57,39 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
+                                                <label for="datepicker" class="control-label ">Date</label>
+                                                <input type="text" class="form-control datepicker" id="datepicker"
+                                                       name="damageDate" placeholder="Enter Date."/>
+                                                <span class="help-block" for="damageDate"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <div class="col-md-12">
                                                 <label for="productAmount" class="control-label">Quantity</label>
                                                 <g:textField class="form-control" id="productAmount" tabindex="2"
-                                                             name="productAmount" placeholder="Product Amount."/>
+                                                             name="productAmount" placeholder="Quantity."/>
                                                 <span class="help-block" for="productAmount"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepicker"
-                                                       name="damageDate" placeholder="Enter Damage Date."/>
-                                                <span class="help-block" for="datepicker"></span>
+                                                <label for="description" class="control-label">Customer Description</label>
+                                                <g:textField class="form-control" id="customerDescription" tabindex="2"
+                                                             name="description" placeholder="Enter Description."/>
+                                                <span class="help-block" for="description"></span>
                                             </div>
                                         </div>
 
 
+
+
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Product Description</label>
-                                                <g:textField class="form-control" id="description" tabindex="2"
-                                                             name="description" placeholder="Enter Description."/>
+                                                <label for="description" class="control-label">Return From</label>
+                                                <g:textField class="form-control" id="returnFrom" tabindex="2"
+                                                             name="returnFrom" placeholder="Return From"/>
                                                 <span class="help-block" for="description"></span>
                                             </div>
                                         </div>
@@ -117,10 +128,11 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">Sub Product Name</th>
+                                            <th class="text-center">Category Name</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Damage Date</th>
                                             <th class="text-center">Description</th>
+                                            <th class="text-center">Return From</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                         </thead>
@@ -132,6 +144,7 @@
                                                 <td>${productItem[2]}</td>
                                                 <td>${productItem[3]}</td>
                                                 <td>${productItem[4]}</td>
+                                                <td>${productItem[5]}</td>
                                                 <td>
                                                     <sec:access controller="productItem" action="edit">
                                                         <span class="col-xs-6"><a href=""
@@ -176,28 +189,41 @@
 
 
     $('#create-form').validate({
-        errorElement: 'label',
+        errorElement: 'small',
         errorClass: 'help-block',
         focusInvalid: false,
         rules: {
-            name: {
-                required: true,
-                minlength: 2
-            },
-            description: {
-                maxlength: 200
-            },
-            status: {
+            productItem: {
                 required: true
             },
-            subCat: {
+            productAmount: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            returnFrom: {
+                required: true
+            },
+            damageDate: {
                 required: true
             }
         },
         messages: {
-            name: {
-                required: "Please provide a Name",
-                minlength: "Name must be at least 2 characters long"
+            productItem: {
+                required: " "
+            },
+            productAmount: {
+                required: " "
+            },
+            description: {
+                required: " "
+            },
+            returnFrom: {
+                required: " "
+            },
+            damageDate: {
+                required: " "
             }
         },
         invalidHandler: function (event, validator) {
@@ -236,7 +262,7 @@
 
     jQuery(function ($) {
         var oTable1 = $('#list-table').dataTable({
-//        "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
+            "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
@@ -246,12 +272,15 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
-                $('td:eq(5)', nRow).html(getActionButtons(nRow, aData));
+                $('td:eq(6)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,
+                { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false },
@@ -277,8 +306,9 @@
                     if (data.isError == false) {
                         $('#id').val(data.obj.id);
                         $('#productItem').val(data.product.id);
-                        $('#description').val(data.obj.description);
+                        $('#customerDescription').val(data.obj.description);
                         $('#productAmount').val(data.obj.productAmount);
+                        $('#returnFrom').val(data.obj.returnFrom);
 //                        $('#datepicker').val(data.obj.damageDate);
                         $('.datepicker').datepicker('setDate', new Date(data.obj.damageDate));
                         $("#productNameCreate").show(500);
@@ -310,6 +340,8 @@
                     success: function (data, textStatus) {
                         if (data.isError == false) {
                             $("#list-table").DataTable().row(selectRow).remove().draw();
+                            var table = $('#list-table').DataTable();
+                            table.ajax.reload();
                         } else {
                             setTimeout(function() {
                                 $.gritter.add({

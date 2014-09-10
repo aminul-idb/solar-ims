@@ -7,6 +7,7 @@ class DamageProduct {
     Date damageDate
     Date entryDate = new Date()
     String description
+    String returnFrom
 
     Status status = Status.ACTIVE
 
@@ -15,6 +16,8 @@ class DamageProduct {
         entryDate nullable: true, blank: true
         status nullable: true, blank: true
         productAmount nullable: true, blank: true
+        returnFrom nullable: false, blank: false
+        productItem nullable: false, blank: false
     }
 
 }

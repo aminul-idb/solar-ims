@@ -47,6 +47,17 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
+                                                <label for="toBranch" class=" control-label">To </label><br>
+                                                <g:select class="form-control" id="toBranch" name='toBranch'
+                                                          noSelection="${['': 'Select One...']}"
+                                                          from='${com.startup.inventory.Branch.values()}'
+                                                          optionKey="key" optionValue="value"></g:select>
+                                                <span class="help-block" for="toBranch"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <div class="col-md-12">
                                                 <label for="fromBranch" class="control-label">From</label>
                                                 <g:select class="form-control" id="fromBranch" name='fromBranch'
                                                           noSelection="${['': 'Select One...']}"
@@ -56,16 +67,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
-                                            <div class="col-md-12">
-                                                <label for="toBranch" class=" control-label">To </label><br>
-                                                <g:select class="form-control" id="toBranch" name='toBranch'
-                                                          noSelection="${['': 'Select One...']}"
-                                                          from='${com.startup.inventory.Branch.values()}'
-                                                          optionKey="key" optionValue="value"></g:select>
-                                                <span class="help-block" for="toBranch"></span>
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
@@ -89,7 +91,6 @@
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
-                                                          noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Status.values()}'
                                                           optionKey="key" optionValue="value"></g:select>
                                                 <span class="help-block" for="status"></span>
@@ -103,10 +104,10 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Check Mark</th>
-                                                    <th>Sub Product Name</th>
+                                                    <th>Category</th>
                                                     <th>Product Name</th>
                                                     <th>Quantity</th>
-                                                    <th>Product Total Price</th>
+                                                    <th>Total Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -167,7 +168,7 @@
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="datepickerEdit" class="control-label ">Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepickerEdit"
+                                                <input type="text" required="required" class="form-control datepicker" id="datepickerEdit"
                                                        name="distributionDate" placeholder="Enter distribution Date."/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
@@ -253,10 +254,10 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">Form Branch</th>
                                             <th class="text-center">To Branch</th>
-                                            <th class="text-center">Sub Product Name</th>
-                                            <th class="text-center">Product Name</th>
+                                            <th class="text-center">Form Branch</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Product</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Price</th>
@@ -271,7 +272,7 @@
                                                 <td>${animated[1]}</td>
                                                 <td>${animated[2]}</td>
                                                 <td>${animated[3]}</td>
-                                                <td>${animated[4]}</td>
+                                                <td class="bigFont">${animated[4]}</td>
                                                 <td>${animated[5]}</td>
                                                 <td>${animated[6]}</td>
                                                 <td>${animated[7]}</td>
@@ -316,25 +317,29 @@
 
         //$('#edit-form-product').hide();
         $('#create-form-product').validate({
-            errorElement: 'label',
+            errorElement: 'small',
             errorClass: 'help-block',
             focusInvalid: false,
             rules: {
-                name: {
-                    required: true,
-                    minlength: 2
+                toBranch: {
+                    required: true
                 },
-                description: {
-                    maxlength: 200
+                fromBranch: {
+                    required: true
                 },
-                status: {
+                datepicker: {
                     required: true
                 }
             },
             messages: {
-                name: {
-                    required: "Please provide LC",
-                    minlength: "LC must be at least 2 characters long"
+                toBranch: {
+                    required: " "
+                },
+                fromBranch: {
+                    required: " "
+                },
+                datepicker: {
+                    required: " "
                 }
             },
             invalidHandler: function (event, validator) {
@@ -392,9 +397,12 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
+                $('td:eq(4)', nRow).addClass('bigFont');
                 $('td:eq(9)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,
@@ -410,7 +418,7 @@
             ]
         });
 
-        var oTable2 = $('#productList-table').dataTable({
+       /* var oTable2 = $('#productList-table').dataTable({
             "sDom": " ",
             aoColumns: [
                 { "bSortable": false },
@@ -419,7 +427,7 @@
                 { "bSortable": false },
                 { "bSortable": false }
             ]
-        });
+        });*/
 
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);

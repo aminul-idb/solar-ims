@@ -60,7 +60,7 @@ class ReturnNewProductController {
             render result as JSON
             return
         }
-        def result = [isError: true, obj: returnNewProduct, product: returnNewProduct.productItem]
+        def result = [isError: false, obj: returnNewProduct, product: returnNewProduct.productItem]
         render result as JSON
     }
 

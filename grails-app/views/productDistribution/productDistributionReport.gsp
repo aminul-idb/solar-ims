@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Branch Distribution Report</title>
+    <title>Product Distribution Report</title>
     <asset:javascript src="bootstrap-datepicker.min.js"/>
 
 </head>
@@ -12,7 +12,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 
     <div class="col-lg-8">
-        <h2>Branch Distribution Report</h2>
+        <h2>Product Distribution Report</h2>
     </div>
 
 </div>
@@ -27,14 +27,13 @@
                         <section class="panel">
                             <div class="panel-body">
                                 <div class="form">
-                                    <form class="cmxform form-horizontal" method="post" action="${createLink(controller: 'branchDistribution', action: 'branchDistributionReport')}" id="create-form-product">
-                                        <g:hiddenField name="id"/>
+                                    <form class="cmxform form-horizontal" method="post" action="${createLink(controller: 'productDistribution', action: 'productDistributionReport')}" id="create-form-product">
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="toDatepicker" class="control-label ">To Date</label>
-                                                <input type="date" class="form-control datepicker" required="required" id="toDatepicker"
-                                                       name="toDate" placeholder="Enter Import Date."/>
+                                                <input type="date" class="form-control datepicker" id="toDatepicker"
+                                                       name="toDate" placeholder="Enter Import Date." required="required"/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
                                         </div>
@@ -42,8 +41,8 @@
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="fromDatepicker" class="control-label ">From Date</label>
-                                                <input type="date" class="form-control datepicker" required="required" id="fromDatepicker"
-                                                       name="fromDate" placeholder="Enter Import Date."/>
+                                                <input type="date" class="form-control datepicker" id="fromDatepicker"
+                                                       name="fromDate" placeholder="Enter Import Date." required="required"/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
                                         </div>

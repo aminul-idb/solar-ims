@@ -11,6 +11,7 @@ class ReturnNewProduct {
     Status status = Status.ACTIVE
 
     static constraints = {
+        productItem nullable: false, blank: false
         description nullable: true, blank: true
         entryDate nullable: true, blank: true
         productAmount nullable: true, blank: true

@@ -12,6 +12,8 @@ class Import {
     CategoryType categoryType
 
     static constraints = {
+        productItem nullable: false, blank: false
+        importDate nullable: false
         entryDate nullable: true
         productPrice nullable: true, blank: true
         amount nullable: true, blank: true

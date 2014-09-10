@@ -57,18 +57,18 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        %{--<div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="datepicker" class="control-label ">Import Date</label>
                                                 <input type="text" class="form-control datepicker" id="datepicker"
                                                        name="importDate" placeholder="Enter Import Date."/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
-                                        </div>
+                                        </div>--}%
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Import Description</label>
+                                                <label for="description" class="control-label">Description</label>
                                                 <g:textField class="form-control" id="description"
                                                              name="description" placeholder="Enter Description."/>
                                                 <span class="help-block" for="description"></span>
@@ -90,10 +90,10 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Check Mark</th>
-                                                    <th>Sub Product Name</th>
+                                                    <th>Category</th>
                                                     <th>Product Name</th>
                                                     <th>Quantity</th>
-                                                    <th>Sub Product Price</th>
+                                                    <th>Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -142,14 +142,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        %{--<div class="form-group col-md-3">
                                             <div class="col-md-12">
                                                 <label for="datepicker" class="control-label ">Import Date</label>
                                                 <input type="text" class="form-control datepicker" id="datepicker"
                                                        name="importDate" placeholder="Enter Import Date."/>
                                                 <span class="help-block" for="datepicker"></span>
                                             </div>
-                                        </div>
+                                        </div>--}%
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
@@ -175,10 +175,10 @@
                                             <table class="table table-striped table-hover table-bordered" id="importProductEdit">
                                                 <thead>
                                                 <tr>
-                                                    <th>Sub Product Name</th>
+                                                    <th>Category</th>
                                                     <th>Product Name</th>
                                                     <th>Quantity</th>
-                                                    <th>Sub Product Price</th>
+                                                    <th>Category Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -230,10 +230,9 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>LC No.</th>
-                                            <th>Sub Product Name</th>
+                                            <th>Category</th>
                                             <th>Quantity</th>
                                             <th>Entry Date</th>
-                                            <th>Import Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -243,11 +242,10 @@
                                             <tr>
                                                 <td>${animated[0]}</td>
                                                 <td>${animated[1]}</td>
-                                                <td>${animated[2]}</td>
+                                                <td class="bigFont">${animated[2]}</td>
                                                 <td>${animated[3]}</td>
                                                 <td>${animated[4]}</td>
                                                 <td>${animated[5]}</td>
-                                                <td>${animated[6]}</td>
                                                 <td>
                                                     <sec:access controller="import" action="edit">
                                                         <span class="col-md-6">
@@ -288,25 +286,17 @@
 
         //$('#edit-form-product').hide();
         $('#create-form-product').validate({
-        errorElement: 'label',
+        errorElement: 'small',
         errorClass: 'help-block',
         focusInvalid: false,
         rules: {
-            name: {
+            lcSettings: {
                 required: true,
-                minlength: 2
-            },
-            description: {
-                maxlength: 200
-            },
-            status: {
-                required: true
             }
         },
         messages: {
-            name: {
+            lcSettings: {
                 required: "Please provide LC",
-                minlength: "LC must be at least 2 characters long"
             }
         },
         invalidHandler: function (event, validator) {
@@ -379,7 +369,7 @@
 
 
         var oTable1 = $('#list-table').dataTable({
-            "sDom": " ", //<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>
+            "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
@@ -389,13 +379,15 @@
                 if (aData.DT_RowId == undefined) {
                     return true;
                 }
-                $('td:eq(7)', nRow).html(getActionButtons(nRow, aData));
+                $('td:eq(2)', nRow).addClass('bigFont');
+                $('td:eq(6)', nRow).html(getActionButtons(nRow, aData));
                 return nRow;
             },
+            "iDisplayLength": 100,
+            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
                 null,
-                { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false },
@@ -405,7 +397,7 @@
             ]
         });
 
-        var oTable2 = $('#productList-table').dataTable({
+        /*var oTable2 = $('#productList-table').dataTable({
             "sDom": " ",
             aoColumns: [
                 { "bSortable": false },
@@ -414,7 +406,7 @@
                 { "bSortable": false },
                 { "bSortable": false }
             ]
-        });
+        });*/
 
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);
@@ -442,7 +434,7 @@
 
                         $('#importProduct').val(data.import.id);
                         $('#editLcSettings').val(data.import.lcSettings.id);
-                        $('.datepicker').datepicker('setDate', new Date(data.import.importDate));
+                        //$('.datepicker').datepicker('setDate', new Date(data.import.importDate));
                         $('.description').val(data.import.description);
                         $('.status').val(data.import.status ? data.import.status.name :'');
                         $("#animportCreate").show(500);
@@ -453,7 +445,7 @@
                         $('#productPrice').val(data.import.productPrice);
 
                         document.getElementById("lcSettings").disabled=true;
-                        document.getElementById("datepicker").disabled=true;
+                        //document.getElementById("datepicker").disabled=true;
 
                     } else {
                         alert(data.message);
@@ -478,6 +470,8 @@
                     success: function (data, textStatus) {
                         if (data.isError == false) {
                             $("#list-table").DataTable().row(selectRow).remove().draw();
+                            var table = $('#list-table').DataTable();
+                            table.ajax.reload();
                         } else {
                             alert(data.message);
                         }

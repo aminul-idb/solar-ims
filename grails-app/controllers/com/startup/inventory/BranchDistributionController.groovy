@@ -71,15 +71,11 @@ class BranchDistributionController {
 
 
         // save
-        def productItemList = params.productItemId
-        def amountList = params.amount
-        def productPriceList = params.productPrice
-        def productCheckList = params.productCheck
-
-        print("productItemList>>" + productItemList)
-        print("length>" + productItemList.length)
-
-        for (int i=0; i<productItemList.length; i++) {
+        def productItemList = Arrays.asList(params.productItemId)
+        def amountList = Arrays.asList(params.amount)
+        def productPriceList = Arrays.asList(params.productPrice)
+        def productCheckList = Arrays.asList(params.productCheck)
+        for (int i=0; i<productItemList.size(); i++) {
             BranchDistribution branchDistribution = new BranchDistribution()
             if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
                 println "amount =" + amountList[i] + "| product Id =" + productItemList[i]
@@ -169,11 +165,28 @@ class BranchDistributionController {
 
     def branchDistributionReport() {
         if(params.submit == "report"){
-            def toDate = (params.toDate) ? Date.parse('dd/MM/yyyy', params.toDate) : null
-            def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
+
             Map paramsMap = new LinkedHashMap()
-            paramsMap.put("toDate", toDate)
-            paramsMap.put("fromDate", fromDate)
+            if(params.toDate){
+                def toDate = (params.toDate) ? Date.parse('dd/MM/yyyy', params.toDate) : null
+                paramsMap.put("toDate", toDate)
+            }
+
+            if(params.fromDate){
+                def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
+                paramsMap.put("fromDate", fromDate)
+            }
+
+            if(params.categoryType){
+                def categoryType = params.categoryType as Long
+                paramsMap.put("categoryType", categoryType)
+            }
+
+            if(params.productItem){
+                def productItem = params.productItem as Long
+                paramsMap.put("productItem", productItem)
+            }
+
             String outputFileName = 'reportInventoryBranchDistribution.pdf'
             JasperReportDef reportDef = new JasperReportDef(
                     name: JASPER_FILE,
