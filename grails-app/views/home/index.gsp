@@ -56,15 +56,17 @@
                                                     <%
                                                             def branchProduct = BranchDistribution.findByProductItem(productList[j])
                                                             if (branchProduct?.productItem?.name == null){
-                                                                continue
+                                                                continue;
                                                             }
                                                             def productName = branchProduct?.productItem
-                                                            def branch = branchProduct?.fromBranch
+                                                            def fromBranch = branchProduct?.fromBranch
+//                                                            def toBranch = branchProduct?.toBranch
+                                                            int chittagongTotalProduct = 0
 
                                                             def dhakaCriteria = BranchDistribution?.createCriteria()
                                                             def dhaka = dhakaCriteria.get {
                                                                 and {
-                                                                    eq("fromBranch", branch)
+                                                                    eq("fromBranch", fromBranch)
                                                                     eq("productItem", productName)
                                                                 }
                                                                 projections {
@@ -76,14 +78,16 @@
                                                             def chittagongCriteria = BranchDistribution?.createCriteria()
                                                             def chittagong = chittagongCriteria.get {
                                                                 and {
-                                                                    eq("toBranch", branch)
+                                                                    eq("toBranch", fromBranch)
                                                                     eq("productItem", productName)
                                                                 }
                                                                 projections {
                                                                     sum("amount")
                                                                 }
                                                             }
-                                                            int chittagongTotalProduct = chittagong as Integer
+                                                            if(chittagong){
+                                                                chittagongTotalProduct = chittagong as Integer
+                                                            }
 
                                                             def dhakaTo = dhakaTotalProduct - chittagongTotalProduct
                                                         %>
