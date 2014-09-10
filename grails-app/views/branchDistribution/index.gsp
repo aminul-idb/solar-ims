@@ -327,7 +327,7 @@
                 fromBranch: {
                     required: true
                 },
-                datepicker: {
+                distributionDate: {
                     required: true
                 }
             },
@@ -338,7 +338,7 @@
                 fromBranch: {
                     required: " "
                 },
-                datepicker: {
+                distributionDate: {
                     required: " "
                 }
             },

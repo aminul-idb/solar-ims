@@ -78,7 +78,6 @@ class BranchDistributionController {
         for (int i=0; i<productItemList.size(); i++) {
             BranchDistribution branchDistribution = new BranchDistribution()
             if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
-                println "amount =" + amountList[i] + "| product Id =" + productItemList[i]
                 branchDistribution.distributionDate = Date.parse('dd/MM/yyyy', params.distributionDate)
                 branchDistribution.toBranch = params.toBranch
                 branchDistribution.fromBranch = params.fromBranch

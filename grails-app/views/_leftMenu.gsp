@@ -14,7 +14,10 @@
                 </div>
 
             </li>
-            <li class="active">
+            <li %{--class="active"--}%>
+                <a href="${g.createLink(controller: 'home',action: 'index')}"><i class="fa fa-th-large"></i> <span class="nav-label">Home</span></a>
+            </li>
+            <li>
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Settings</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="${g.createLink(controller: 'categoryType',action: 'index')}">Product</a></li>

@@ -15,7 +15,7 @@ class BranchDistribution {
     static constraints = {
         status nullable: true, blank: true
         branchUniqueId nullable: false, blank: false
-        description nullable: true, blank: false
+        description nullable: true, blank: true
         productPrice nullable: true, blank: true
         amount nullable: true, blank: true
         fromBranch nullable: false, blank: false
