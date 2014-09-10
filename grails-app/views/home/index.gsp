@@ -11,7 +11,6 @@
 <g:render template='/subHead'/>
 
 %{--<h1>${category}</h1>--}%
-
     <div class="row">
         <div class="col-lg-12">
             <div class="wrapper wrapper-content animated fadeInRight">
@@ -22,7 +21,7 @@
                                 <g:if test="${com.startup.inventory.CategoryType}">
                                 <div class="panel-body">
                                     <%
-                                        def category = CategoryType.list()
+                                        def category = CategoryType.list(sort: 'priority', order: "asc")
                                         for (int i=0; i<category.size(); i++){
                                     %>
                                         <h1>${category?.name[i]}</h1>

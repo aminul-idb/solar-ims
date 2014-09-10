@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 @Transactional
 class CategoryTypeService {
 
-    static final String[] sortColumns = ['id','name']
+    static final String[] sortColumns = ['id', 'name']
     LinkedHashMap categoryTypePaginateList(GrailsParameterMap params){
         int iDisplayStart = params.iDisplayStart ? params.getInt('iDisplayStart') : CommonUtils.DEFAULT_PAGINATION_START
         int iDisplayLength = params.iDisplayLength ? params.getInt('iDisplayLength') : CommonUtils.DEFAULT_PAGINATION_LENGTH
@@ -27,16 +27,16 @@ class CategoryTypeService {
             }
 
 //            order(sortColumn, sSortDir)
-            order("priority", 'desc')
+            order("priority", 'asc')
         }
         int totalCount = results.totalCount
         int serial = iDisplayStart;
         if (totalCount > 0) {
-            if (sSortDir.equals(CommonUtils.SORT_ORDER_DESC)) {
+            if (sSortDir.equals(CommonUtils.SORT_ORDER_ASC)) {
                 serial = (totalCount + 1) - iDisplayStart
             }
             results.each { CategoryType categoryType ->
-                if (sSortDir.equals(CommonUtils.SORT_ORDER_ASC)) {
+                if (sSortDir.equals(CommonUtils.SORT_ORDER_DESC)) {
                     serial++
                 } else {
                     serial--

@@ -239,10 +239,10 @@
                 return nRow;
             },
             'iDisplayLength': 100,
-            "aaSorting": [[0, 'ase']],
+//            "aaSorting": [[0, 'ase']],
             "aoColumns": [
-                null,
-                null,
+                { "bSortable": false },
+                { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false }
