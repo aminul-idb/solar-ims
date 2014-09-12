@@ -8,7 +8,7 @@ import javax.validation.constraints.Null
 class HomeController {
 
     def index() {
-        def category = CategoryType.list()
+        /*def category = CategoryType.list()
         for (int i=0; i<category.size(); i++){
             def productList = ProductItem.findAllByCategoryType(category[i])
             for (int j=0; j<productList.size(); j++) {
@@ -36,7 +36,7 @@ class HomeController {
                 }
                 print("__" + branchCount)
             }
-        }
+        }*/
         //render(view: '/home/index', model: [category: category])
     }
 }

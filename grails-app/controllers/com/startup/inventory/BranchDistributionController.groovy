@@ -35,7 +35,7 @@ class BranchDistributionController {
         LinkedHashMap resultMap = distributionService.distributionPaginateList(params)
 
         if (!resultMap || resultMap.totalCount == 0) {
-            gridData = [iTotalRecords: 0, iTotalDisplayRecords: 0, aaData: null]
+            gridData = [iTotalRecords: 0, iTotalDisplayRecords: 0, aaData: []]
             result = gridData as JSON
             render result
             return
@@ -108,7 +108,7 @@ class BranchDistributionController {
         BranchDistribution branchDistribution = BranchDistribution.read(id)
         if (!branchDistribution) {
             result.put('isError', true)
-            result.put('message', 'Import name not found')
+            result.put('message', 'Branch Distribution name not found')
             outPut = result as JSON
             render outPut
             return

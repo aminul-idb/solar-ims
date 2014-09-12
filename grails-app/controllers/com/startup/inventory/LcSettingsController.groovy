@@ -28,7 +28,7 @@ class LcSettingsController {
         LinkedHashMap resultMap = lcSettingsService.lcSettingsPaginateList(params)
 
         if (!resultMap || resultMap.totalCount == 0) {
-            gridData = [iTotalRecords: 0, iTotalDisplayRecords: 0, aaData: null]
+            gridData = [iTotalRecords: 0, iTotalDisplayRecords: 0, aaData: []]
             result = gridData as JSON
             render result
             return

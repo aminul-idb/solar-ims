@@ -225,7 +225,7 @@
     jQuery(function ($) {
         var oTable1 = $('#list-table').dataTable({
             "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
-//            "bProcessing": true,
+//            "bProcessing": false,
             "bAutoWidth": true,
             "bServerSide": true,
             "deferLoading": ${totalCount},
@@ -302,12 +302,14 @@
                             $("#list-table").DataTable().row(selectRow).remove().draw( false );
                             var table = $('#list-table').DataTable();
                             table.ajax.reload();
+                            alert("Yes");
                             setTimeout(function() {
                                 $.gritter.add({
                                     title: data.message
                                 });
                             }, 2000);
                         } else {
+                            alert("No");
                             setTimeout(function() {
                                 $.gritter.add({
                                     title: data.message

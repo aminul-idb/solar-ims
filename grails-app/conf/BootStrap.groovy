@@ -10,16 +10,18 @@ class BootStrap {
 
     def init = { servletContext ->
         createUserWithRole()
-        createCategory()
+//        createCategory()
 //        createSubCategory()
        // createItem()
     }
 
     void createCategory(){
-        CategoryType.findByName('Battery')?:new CategoryType(name: 'Battery',description: 'Battery only', status:Status.ACTIVE, priority:3).save()
-        CategoryType.findByName('Solar Panel')?:new CategoryType(name: 'Solar Panel',description: 'Solar Panel only', status:Status.ACTIVE, priority:1).save()
-        CategoryType.findByName('Bulb')?:new CategoryType(name: 'Bulb',description: 'Bulb only', status:Status.ACTIVE, priority:2).save()
-        CategoryType.findByName('Cable')?:new CategoryType(name: 'Cable',description: 'Cable only', status:Status.ACTIVE, priority:4).save(flush: true)
+        for(int i=0; i<30; i++){
+            CategoryType.findByName('Battery'+[i])?:new CategoryType(name: 'Battery'+[i],description: 'Battery only', status:Status.ACTIVE, priority:3+i).save(flush: true)
+            CategoryType.findByName('Solar Panel'+[i])?:new CategoryType(name: 'Solar Panel'+[i],description: 'Solar Panel only', status:Status.ACTIVE, priority:1+i).save(flush: true)
+            CategoryType.findByName('Bulb'+[i])?:new CategoryType(name: 'Bulb'+[i],description: 'Bulb only', status:Status.ACTIVE, priority:2+i).save(flush: true)
+            CategoryType.findByName('Cable'+[i])?:new CategoryType(name: 'Cable'+[i],description: 'Cable only', status:Status.ACTIVE, priority:4).save(flush: true)
+        }
     }
 
     void createItem(){
