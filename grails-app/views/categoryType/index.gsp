@@ -170,8 +170,7 @@
         focusInvalid: false,
         rules: {
             name: {
-                required: true,
-                minlength: 2
+                required: true
             },
             priority: {
                 required: true
@@ -179,8 +178,7 @@
         },
         messages: {
             name: {
-                required: "Please provide a Name",
-                minlength: "Name must be at least 2 characters long"
+                required: "Please provide a Name"
             },
             priority: {
                 required: "Please provide a Priority"
@@ -239,10 +237,10 @@
                 return nRow;
             },
             'iDisplayLength': 100,
-//            "aaSorting": [[0, 'ase']],
+            "aaSorting": [[0, 'ase']],
             "aoColumns": [
-                { "bSortable": false },
-                { "bSortable": false },
+                null/*{ "bSortable": false }*/,
+                null/*{ "bSortable": false }*/,
                 { "bSortable": false },
                 { "bSortable": false },
                 { "bSortable": false }

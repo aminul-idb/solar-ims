@@ -5,7 +5,8 @@
     <title>Import Product</title>
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
-    <asset:javascript src="bootstrap-datepicker.min.js"/>
+    <asset:stylesheet src="datepicker.css"/>
+    <asset:javascript src="bootstrap-datepicker.js"/>
 
 </head>
 

@@ -87,7 +87,6 @@ class CategoryTypeController {
 
         def result = [isError: false, obj: categoryType]
         render result as JSON
-        return
     }
 
     def delete(Long id) {
@@ -96,9 +95,6 @@ class CategoryTypeController {
             render(view: '/categoryType/index')
             return
         }
-
-        print(">>>" + id )
-
         CategoryType categoryType = CategoryType.get(id)
         if (!categoryType) {
             def result = [isError: true, message: "Category name not found!!"]

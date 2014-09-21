@@ -49,7 +49,7 @@ class ProductDistributionController {
     }
 
     def save() {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/productDistribution/index')
             return
@@ -83,7 +83,7 @@ class ProductDistributionController {
         def productPriceList = Arrays.asList(params.productPrice)
         def productCheckList = Arrays.asList(params.productCheck)
 
-        for (int i = 0; i < productItemList.length; i++) {
+        for (int i = 0; i < productItemList.size(); i++) {
             ProductDistribution productDistribution = new ProductDistribution()
             if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
                 println "amount =" + amountList[i] + "| product Id =" + productItemList[i]
@@ -106,7 +106,7 @@ class ProductDistributionController {
     }
 
     def edit(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/productDistribution/index')
             return
@@ -122,7 +122,7 @@ class ProductDistributionController {
     }
 
     def delete(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/productDistribution/index')
             return
@@ -140,22 +140,20 @@ class ProductDistributionController {
 
     def productDistributionSearch() {
         if (request.method == 'POST') {
-            def distributionDate = (params.distributionDate) ? Date.parse('dd/MM/yyyy', params.distributionDate) : null
+            def toImportDate = (params.toImportDate) ? Date.parse('dd/MM/yyyy', params.toImportDate) : null
+            def fromImportDate = (params.fromImportDate) ? Date.parse('dd/MM/yyyy', params.fromImportDate) : null
 
             def productDistribution = ProductDistribution.createCriteria()
             def results = productDistribution.list() {
                 and {
-                    if (params.fromBranch) {
-                        eq("fromBranch", params.fromBranch)
+                    if (toImportDate && fromImportDate) {
+                        between("distributionDate", toImportDate, fromImportDate)
                     }
                     if (params.toCustomer) {
                         ilike("toCustomer", "%"+params.toCustomer+"%")
                     }
                     if (params.address) {
                         ilike("address", "%"+params.address+"%")
-                    }
-                    if (distributionDate) {
-                        eq("distributionDate", distributionDate)
                     }
                     if (params.categoryType) {
                         eq("categoryType", CategoryType.get(params.categoryType as Long))
@@ -165,13 +163,6 @@ class ProductDistributionController {
                     }
                 }
             }
-
-            /*fromBranch
-        toCustomer
-        address
-        distributionDate
-        categoryType
-        productItem*/
 
             def resultList = []
             for (int i=0; i<results.size(); i++){
@@ -185,9 +176,9 @@ class ProductDistributionController {
                 ]
                 resultList << result
             }
-
             LinkedHashMap result = new LinkedHashMap()
             result.put('resultList', resultList)
+            result.put('isError', false)
             def outPut = result as JSON
             render outPut
         }
@@ -221,10 +212,6 @@ class ProductDistributionController {
                 paramsMap.put("productItem", productItem)
             }
 
-            //def fromDate = (params.fromDate) ? Date.parse('dd/MM/yyyy', params.fromDate) : null
-            //Map paramsMap = new LinkedHashMap()
-            //paramsMap.put("toDate", toDate)
-            //paramsMap.put("fromDate", fromDate)
             String outputFileName = 'reportInventoryProductDistribution.pdf'
             JasperReportDef reportDef = new JasperReportDef(
                     name: JASPER_FILE,

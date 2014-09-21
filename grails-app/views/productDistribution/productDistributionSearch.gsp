@@ -5,7 +5,8 @@
     <title>Distribution Product</title>
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
-    <asset:javascript src="bootstrap-datepicker.min.js"/>
+    <asset:stylesheet src="datepicker.css"/>
+    <asset:javascript src="bootstrap-datepicker.js"/>
 
 </head>
 
@@ -32,7 +33,7 @@
                                     <form class="cmxform form-horizontal " id="create-form-product">
                                         <g:hiddenField name="id"/>
 
-                                        <div class="form-group col-md-4">
+                                        %{--<div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="fromBranch" class="control-label">From</label>
                                                 <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
@@ -41,7 +42,7 @@
                                                           optionKey="key" optionValue="value"></g:select>
                                                 <span class="help-block" for="fromBranch"></span>
                                             </div>
-                                        </div>
+                                        </div>--}%
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
@@ -49,6 +50,26 @@
                                                 <g:textField class="form-control toCustomer" id="toCustomer"
                                                              name="toCustomer" placeholder="Enter Customer Name."/>
                                                 <span class="help-block" for="description"></span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group col-md-4">
+                                            <div class="col-md-12">
+                                                <label for="toDatepicker" class="control-label ">Start Date</label>
+                                                <input type="date" class="form-control datepicker" id="toDatepicker"
+                                                       name="toImportDate" placeholder="Enter Import Date."/>
+                                                <span class="help-block" for="datepicker"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <div class="col-md-12">
+                                                <label for="fromDatepicker" class="control-label ">End Date</label>
+                                                <input type="date" class="form-control datepicker" id="fromDatepicker"
+                                                       name="fromImportDate" placeholder="Enter Import Date."/>
+                                                <span class="help-block" for="datepicker"></span>
                                             </div>
                                         </div>
 
@@ -63,15 +84,6 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepicker"
-                                                       name="distributionDate" placeholder="Enter distribution Date."/>
-                                                <span class="help-block" for="datepicker"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-3">
-                                            <div class="col-md-12">
                                                 <label for="categoryType" class="control-label">Product</label>
                                                 <select name="categoryType" id="categoryType" class="form-control lcSettings">
                                                     <option value="">Select Product</option>
@@ -83,7 +95,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="productItem" class=" control-label">Category Name</label><br>
                                                 <select name="productItem" id="productItem" class="form-control productItem">
@@ -99,7 +111,7 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-md-offset-8 col-md-4">
+                                            <div class="col-md-offset-9 col-md-2">
                                                 <button name="submit" class="btn btn-primary" tabindex="3" type="submit">Search</button>
                                                 <button class="btn btn-default" tabindex="4" type="reset">Reset</button>
                                             </div>
@@ -159,7 +171,13 @@
 
     jQuery(function ($) {
 
-        $('#datepicker').datepicker({
+        $('#toDatepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            gotoCurrent: true,
+            autoclose: true
+        });
+
+        $('#fromDatepicker').datepicker({
             format: 'dd/mm/yyyy',
             gotoCurrent: true,
             autoclose: true

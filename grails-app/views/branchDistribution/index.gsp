@@ -6,7 +6,9 @@
     <asset:stylesheet src="formDataTable.css"/>
     <asset:javascript src="formDataTable.js"/>
     <asset:javascript src="formDataTable.js"/>
-    <asset:javascript src="bootstrap-datepicker.min.js"/>
+    <asset:stylesheet src="datepicker.css"/>
+    <asset:javascript src="bootstrap-datepicker.js"/>
+
 
 </head>
 
@@ -47,7 +49,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="toBranch" class=" control-label">To </label><br>
+                                                <label for="toBranch" class=" control-label">Source Branch </label><br>
                                                 <g:select class="form-control" id="toBranch" name='toBranch'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Branch.values()}'
@@ -58,7 +60,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="fromBranch" class="control-label">From</label>
+                                                <label for="fromBranch" class="control-label">Destination Branch</label>
                                                 <g:select class="form-control" id="fromBranch" name='fromBranch'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Branch.values()}'
@@ -254,8 +256,8 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Serial</th>
-                                            <th class="text-center">To Branch</th>
-                                            <th class="text-center">Form Branch</th>
+                                            <th class="text-center">Source Branch</th>
+                                            <th class="text-center">Destination Branch</th>
                                             <th class="text-center">Category</th>
                                             <th class="text-center">Product</th>
                                             <th class="text-center">Date</th>

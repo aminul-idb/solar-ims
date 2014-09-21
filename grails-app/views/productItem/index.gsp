@@ -242,6 +242,7 @@
                 return nRow;
             },
             "iDisplayLength": 100,
+//            "order": [[ 1, "desc" ]],
             "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null,
