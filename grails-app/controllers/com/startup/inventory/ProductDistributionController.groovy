@@ -6,6 +6,8 @@ import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.springframework.dao.DataIntegrityViolationException
 
+import java.text.SimpleDateFormat
+
 
 @Secured(['ROLE_SUPER_ADMIN'])
 class ProductDistributionController {
@@ -88,7 +90,6 @@ class ProductDistributionController {
             if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
                 println "amount =" + amountList[i] + "| product Id =" + productItemList[i]
                 productDistribution.distributionDate = Date.parse('dd/MM/yyyy', params.distributionDate)
-                /*Date.parse('dd/MM/yyyy', params.distributionDate)*/
                 productDistribution.toCustomer = params.toCustomer
                 productDistribution.fromBranch = params.fromBranch
                 productDistribution.description = params.description
@@ -98,11 +99,137 @@ class ProductDistributionController {
                 productDistribution.productPrice = productPriceList[i] as String
                 productDistribution.productItem = ProductItem.get(productItemList[i] as Long)
                 productDistribution.categoryType = productDistribution.productItem.categoryType
-                productDistribution.save(flush: true)
+                def productDistributionSaved = productDistribution.save(flush: true)
+                yearlyReportSave(productDistributionSaved)
             }
         }
         def result = [isError: true, message: "Product Distribution Save successfully!!"]
         render result as JSON
+    }
+
+
+    def private static yearlyReportSave(ProductDistribution productDistribution){
+        def dateFormat =  productDistribution.distributionDate.format('dd-MMMM-yyyy')
+        def dateSplit = dateFormat.split('-')
+        String month = dateSplit[1] as String
+
+        switch (month) {
+            case "January":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        janToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "February":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        febToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "March":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        marToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "April":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        aprToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "May":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        mayToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "June":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        junToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "July":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        julToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "August":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        augToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "September":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        sepToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "October":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        octToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "November":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        novToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            case "December":
+                YearlyReport yearlyReport = new YearlyReport(
+                        categoryType: productDistribution.categoryType,
+                        productItem: productDistribution.productItem,
+                        year: dateSplit[2],
+                        decToAmount: productDistribution.amount
+                ).save(flush: true)
+                break;
+
+            default:
+                month = "Invalid month";
+                print(month)
+                break;
+        }
+
+
+
     }
 
     def edit(Long id) {

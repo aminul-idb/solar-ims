@@ -45,7 +45,7 @@
                                     <form class="cmxform form-horizontal " id="create-form-product">
                                         <g:hiddenField name="id"/>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="lcSettings" class="control-label">LC No.</label>
 
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>--}%
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Description</label>
                                                 <g:textField class="form-control" id="description"
@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
@@ -292,12 +292,12 @@
         focusInvalid: false,
         rules: {
             lcSettings: {
-                required: true,
+                required: true
             }
         },
         messages: {
             lcSettings: {
-                required: "Please provide LC",
+                required: "Please provide LC"
             }
         },
         invalidHandler: function (event, validator) {
