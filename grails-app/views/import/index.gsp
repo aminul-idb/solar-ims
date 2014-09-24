@@ -220,9 +220,9 @@
                                             <th class="text-center">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                         <g:each in="${dataReturn}" var="animated">
-                                            <tr class="text-center">
+                                            <tr>
                                                 <td>${animated[0]}</td>
                                                 <td>${animated[1]}</td>
                                                 <td class="bigFont">${animated[2]}</td>
