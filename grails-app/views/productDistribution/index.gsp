@@ -34,218 +34,219 @@
 </div>
 
 <div class="row" id="animportCreate" style="display:none">
-    <div class="col-lg-12">
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox-content p-xl">
+<div class="col-lg-12">
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="ibox-content p-xl">
 
-                <div class="row">
+<div class="row">
+<div class="col-md-12">
+<section class="panel">
+    <div class="panel-body">
+        <div class="form">
+            <form class="cmxform form-horizontal " id="create-form-product">
+                <g:hiddenField name="id"/>
+
+                <div class="form-group col-md-4">
                     <div class="col-md-12">
-                        <section class="panel">
-                            <div class="panel-body">
-                                <div class="form">
-                                    <form class="cmxform form-horizontal " id="create-form-product">
-                                        <g:hiddenField name="id"/>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="fromBranch" class="control-label">Source Branch</label>
-                                                <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
-                                                          noSelection="${['': 'Select One...']}"
-                                                          from='${com.startup.inventory.Branch.values()}'
-                                                          optionKey="key" optionValue="value"></g:select>
-                                                <span class="help-block" for="fromBranch"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Destination Customer</label>
-                                                <g:textField class="form-control toCustomer" id="toCustomer"
-                                                             name="toCustomer" placeholder="Enter Customer Name."/>
-                                                <span class="help-block" for="description"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Address</label>
-                                                <g:textField class="form-control address" id="address"
-                                                             name="address" placeholder="Enter Address."/>
-                                                <span class="help-block" for="address"></span>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Description</label>
-                                                <g:textField class="form-control description" id="description"
-                                                             name="description" placeholder="Enter Description."/>
-                                                <span class="help-block" for="description"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Date</label>
-                                                <input type="text" required="required" class="form-control datepicker" id="datepicker"
-                                                       name="distributionDate" placeholder="Enter distribution Date."/>
-                                                <span class="help-block" for="datepicker"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="status" class=" control-label">Status </label><br>
-                                                <g:select class="form-control status" id="status" name='status'
-                                                          from='${com.startup.inventory.Status.values()}'
-                                                          optionKey="key" optionValue="value"></g:select>
-                                                <span class="help-block" for="status"></span>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12">
-                                            <table class="table table-striped table-hover table-bordered" id="productList-table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Check Mark</th>
-                                                    <th>Category</th>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <g:each in="${productItemList}" var="productItem" status="i">
-                                                    <tr>
-                                                        <input type="hidden" name="productItemId" value="${productItem?.id}" />
-                                                        <td><input type="checkbox" name="productCheck" value="${productItem?.id}" /></td>
-                                                        <td>${productItem?.name}</td>
-                                                        <td>${productItem?.categoryType?.name}</td>
-                                                        <td><input type="number" name="amount" /></td>
-                                                        <td><input type="number" name="productPrice" /></td>
-                                                    </tr>
-                                                </g:each>
-
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-8 col-md-4">
-                                                <button name="submit" class="btn btn-primary" tabindex="3" type="submit">Save</button>
-                                                <button class="btn btn-default" tabindex="4" type="reset">Cancel</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-
-                                    <form class="cmxform form-horizontal" id="edit-form-product">
-                                        <input type="hidden" id="edit" name="edit" value="edit" />
-                                        <input type="hidden" id="productDistributionId" name="productDistributionId" />
-
-                                        <div class="form-group col-md-3">
-                                            <div class="col-md-12">
-                                                <label for="fromBranch" class="control-label">Source Branch</label>
-                                                <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
-                                                          noSelection="${['': 'Select One...']}"
-                                                          from='${com.startup.inventory.Branch.values()}'
-                                                          optionKey="key" optionValue="value"></g:select>
-                                                <span class="help-block" for="fromBranch"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Destination Customer</label>
-                                                <g:textField class="form-control toCustomer" id="toCustomer"
-                                                             name="toCustomer" placeholder="Enter Customer Name."/>
-                                                <span class="help-block" for="description"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Address</label>
-                                                <g:textField class="form-control address" id="address"
-                                                             name="address" placeholder="Enter Customer Name."/>
-                                                <span class="help-block" for="address"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="description" class="control-label">Description</label>
-                                                <g:textField class="form-control description" id="description"
-                                                             name="description" placeholder="Enter Description."/>
-                                                <span class="help-block" for="description"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Date</label>
-                                                <input type="text" class="form-control datepicker" id="ddatepicker"
-                                                       name="distributionDate" placeholder="Enter distribution Date."/>
-                                                <span class="help-block" for="datepicker"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <div class="col-md-12">
-                                                <label for="status" class=" control-label">Status </label><br>
-                                                <g:select class="form-control status" id="status" name='status'
-                                                          from='${com.startup.inventory.Status.values()}'
-                                                          optionKey="key" optionValue="value"></g:select>
-                                                <span class="help-block" for="status"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            %{-- single edit--}%
-                                            <table class="table table-striped table-hover table-bordered" id="importProductEdit">
-                                                <thead>
-                                                <tr>
-                                                    <th>Category</th>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    %{--<input type="hidden" name="productItemId" value="" id="productItemId" />--}%
-                                                    <td><input type="text" name="productItem" id="productItem" disabled="disabled" /></td>
-                                                    <td><input type="text" name="categoryType" id="categoryType" disabled="disabled" /></td>
-                                                    <td><input type="number" name="amount" id="amount" /></td>
-                                                    <td><input type="number" name="productPrice" id="productPrice" /></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        %{-- end single edit--}%
-
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-8 col-md-4">
-                                                <button name="submit" class="btn btn-primary" tabindex="3" id="editButton" type="submit">Save</button>
-                                                <button class="btn btn-default" tabindex="4" type="reset">Cancel</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
+                        <label for="fromBranch" class="control-label">Source Branch</label>
+                        <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
+                                  noSelection="${['': 'Select One...']}"
+                                  from='${com.startup.inventory.Branch.values()}'
+                                  optionKey="key" optionValue="value"></g:select>
+                        <span class="help-block" for="fromBranch"></span>
                     </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Destination Customer</label>
+                        <g:textField class="form-control toCustomer" id="toCustomer"
+                                     name="toCustomer" placeholder="Enter Customer Name."/>
+                        <span class="help-block" for="description"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Address</label>
+                        <g:textField class="form-control address" id="address"
+                                     name="address" placeholder="Enter Address."/>
+                        <span class="help-block" for="address"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Description</label>
+                        <g:textField class="form-control description" id="description"
+                                     name="description" placeholder="Enter Description."/>
+                        <span class="help-block" for="description"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="datepicker" class="control-label ">Date</label>
+                        <input type="text" required="required" class="form-control datepicker" id="datepicker"
+                               name="distributionDate" placeholder="Enter distribution Date."/>
+                        <span class="help-block" for="datepicker"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="status" class=" control-label">Status</label><br>
+                        <g:select class="form-control status" id="status" name='status'
+                                  from='${com.startup.inventory.Status.values()}'
+                                  optionKey="key" optionValue="value"></g:select>
+                        <span class="help-block" for="status"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <table class="table table-striped table-hover table-bordered" id="productList-table">
+                        <thead>
+                        <tr>
+                            <th>Check Mark</th>
+                            <th>Category</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <g:each in="${productItemList}" var="productItem" status="i">
+                            <tr>
+                                <input type="hidden" name="productItemId" value="${productItem?.id}"/>
+                                <td><input type="checkbox" name="productCheck" value="${productItem?.id}"/></td>
+                                <td>${productItem?.name}</td>
+                                <td>${productItem?.categoryType?.name}</td>
+                                <td><input type="number" name="amount"/></td>
+                                <td><input type="number" name="productPrice"/></td>
+                            </tr>
+                        </g:each>
+
+                        </tbody>
+                    </table>
 
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button name="submit" class="btn btn-primary" tabindex="3" type="submit">Save</button>
+                        <button class="btn btn-default" tabindex="4" type="reset">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+            <form class="cmxform form-horizontal" id="edit-form-product">
+                <input type="hidden" id="edit" name="edit" value="edit"/>
+                <input type="hidden" id="productDistributionId" name="productDistributionId"/>
+
+                <div class="form-group col-md-3">
+                    <div class="col-md-12">
+                        <label for="fromBranch" class="control-label">Source Branch</label>
+                        <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
+                                  noSelection="${['': 'Select One...']}"
+                                  from='${com.startup.inventory.Branch.values()}'
+                                  optionKey="key" optionValue="value"></g:select>
+                        <span class="help-block" for="fromBranch"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Destination Customer</label>
+                        <g:textField class="form-control toCustomer" id="toCustomer"
+                                     name="toCustomer" placeholder="Enter Customer Name."/>
+                        <span class="help-block" for="description"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Address</label>
+                        <g:textField class="form-control address" id="address"
+                                     name="address" placeholder="Enter Customer Name."/>
+                        <span class="help-block" for="address"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Description</label>
+                        <g:textField class="form-control description" id="description"
+                                     name="description" placeholder="Enter Description."/>
+                        <span class="help-block" for="description"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="datepicker" class="control-label ">Date</label>
+                        <input type="text" class="form-control datepicker" id="ddatepicker"
+                               name="distributionDate" placeholder="Enter distribution Date."/>
+                        <span class="help-block" for="datepicker"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="col-md-12">
+                        <label for="status" class=" control-label">Status</label><br>
+                        <g:select class="form-control status" id="status" name='status'
+                                  from='${com.startup.inventory.Status.values()}'
+                                  optionKey="key" optionValue="value"></g:select>
+                        <span class="help-block" for="status"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    %{-- single edit--}%
+                    <table class="table table-striped table-hover table-bordered" id="importProductEdit">
+                        <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            %{--<input type="hidden" name="productItemId" value="" id="productItemId" />--}%
+                            <td><input type="text" name="productItem" id="productItem" disabled="disabled"/></td>
+                            <td><input type="text" name="categoryType" id="categoryType" disabled="disabled"/></td>
+                            <td><input type="number" name="amount" id="amount"/></td>
+                            <td><input type="number" name="productPrice" id="productPrice"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                %{-- end single edit--}%
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button name="submit" class="btn btn-primary" tabindex="3" id="editButton"
+                                type="submit">Save</button>
+                        <button class="btn btn-default" tabindex="4" type="reset">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
+</section>
+</div>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -287,17 +288,17 @@
                                         <td class="col-md-12">
                                             <sec:access controller="productDistribution" action="edit">
                                                 <span class="col-md-10"><a href=""
-                                                                          referenceId="${animated.DT_RowId}"
-                                                                          class="edit-reference"
-                                                                          title="Edit"><span
+                                                                           referenceId="${animated.DT_RowId}"
+                                                                           class="edit-reference"
+                                                                           title="Edit"><span
                                                             class="green fa fa-edit"></span>&nbsp;Edit</a>
                                                 </span>
                                             </sec:access>
                                             <sec:access controller="productDistribution" action="delete">
                                                 <span class="col-md-10"><a href=""
-                                                                          referenceId="${animated.DT_RowId}"
-                                                                          class="delete-reference"
-                                                                          title="Delete"><span
+                                                                           referenceId="${animated.DT_RowId}"
+                                                                           class="delete-reference"
+                                                                           title="Delete"><span
                                                             class="green fa fa-cut"></span>&nbsp;Delete
                                                 </a></span>
                                             </sec:access>
@@ -368,24 +369,24 @@
             },
             submitHandler: function (form) {
                 $.ajax({
-                    url: "${createLink(controller: 'productDistribution', action: 'save')}" ,
+                    url: "${createLink(controller: 'productDistribution', action: 'save')}",
                     type: 'post',
                     dataType: "json",
                     data: $("#create-form-product").serialize(),
                     success: function (data) {
-                        if(data.isError == false){
+                        if (data.isError == false) {
                             //clearForm('#create-form-product');
                             var table = $('#list-table').DataTable();
                             $("#animportCreate").toggle(500);
                             table.ajax.reload();
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 $.gritter.add({
                                     title: data.message
                                 });
                             }, 2000);
                         }
-                        else{
-                            setTimeout(function() {
+                        else {
+                            setTimeout(function () {
                                 $.gritter.add({
                                     title: data.message
                                 });
@@ -428,7 +429,9 @@
                 return nRow;
             },
             "iDisplayLength": 100,
-            "aaSorting": [[0, 'desc']],
+            "aaSorting": [
+                [0, 'desc']
+            ],
             "aoColumns": [
                 null,
                 null,
@@ -446,7 +449,7 @@
 
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);
-            $( "#create-form-product" )[ 0 ].reset();
+            $("#create-form-product")[ 0 ].reset();
             $('#create-form-product').show();
             $('#edit-form-product').hide();
             e.preventDefault();
@@ -480,7 +483,7 @@
                         $('#categoryType').val(data.categoryType);
                         $('#amount').val(data.productDistribution.amount);
                         $('#productPrice').val(data.productDistribution.productPrice);
-                        $('.status').val(data.productDistribution.status ? data.productDistribution.status.name :'');
+                        $('.status').val(data.productDistribution.status ? data.productDistribution.status.name : '');
                     } else {
                         alert(data.message);
                     }
@@ -515,7 +518,7 @@
             e.preventDefault();
         });
 
-        $('#editButton').click(function(e){
+        $('#editButton').click(function (e) {
 
             jQuery.ajax({
                 url: "${createLink(controller: 'productDistribution', action: 'save')}",
@@ -529,7 +532,7 @@
                     var table = $('#list-table').DataTable();
                     table.ajax.reload();
                     $("#animportCreate").toggle(500);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $.gritter.add({
                             title: data.message
                         });
