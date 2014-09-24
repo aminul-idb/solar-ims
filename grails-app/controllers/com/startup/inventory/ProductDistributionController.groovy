@@ -123,7 +123,7 @@ class ProductDistributionController {
 
         switch (month) {
             case "January":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJanToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -138,7 +138,7 @@ class ProductDistributionController {
                 break;
 
             case "February":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndFebToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -153,7 +153,7 @@ class ProductDistributionController {
                 break;
 
             case "March":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndMarToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -168,7 +168,7 @@ class ProductDistributionController {
                 break;
 
             case "April":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndAprToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -183,7 +183,7 @@ class ProductDistributionController {
                 break;
 
             case "May":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndMayToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -198,7 +198,7 @@ class ProductDistributionController {
                 break;
 
             case "June":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJunToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -213,7 +213,7 @@ class ProductDistributionController {
                 break;
 
             case "July":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJulToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -228,7 +228,7 @@ class ProductDistributionController {
                 break;
 
             case "August":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndAugToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -243,7 +243,7 @@ class ProductDistributionController {
                 break;
 
             case "September":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndSepToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck){
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -258,7 +258,7 @@ class ProductDistributionController {
                 break;
 
             case "October":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndOctToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -273,7 +273,7 @@ class ProductDistributionController {
                 break;
 
             case "November":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndNovToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
@@ -288,7 +288,7 @@ class ProductDistributionController {
                 break;
 
             case "December":
-                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndDecToAmountIsNotNull(categoryType,productItem,year)
                 if (!yearlyReportCheck) {
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
