@@ -21,10 +21,13 @@ class DamageProductService {
         List dataReturns = new ArrayList()
         def c = DamageProduct.createCriteria()
         def results = c.list(max: iDisplayLength, offset: iDisplayStart) {
-
-            /*if (sSearch) {
-                like("name", sSearch)
-            }*/
+            createAlias('productItem', 'pm')
+            if (sSearch) {
+                or{
+                    ilike("returnFrom", sSearch)
+                    ilike("pm.name", sSearch)
+                }
+            }
 
             order(sortColumn, sSortDir)
         }

@@ -22,9 +22,12 @@ class ReturnNewProductService {
         def c = ReturnNewProduct.createCriteria()
         def results = c.list(max: iDisplayLength, offset: iDisplayStart) {
 
-            /*if (sSearch) {
-                like("name", sSearch)
-            }*/
+            createAlias('productItem', 'pm')
+            if (sSearch) {
+                or{
+                    ilike("pm.name", sSearch)
+                }
+            }
 
             order(sortColumn, sSortDir)
         }
