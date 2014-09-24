@@ -148,7 +148,7 @@
 
                                         <div class="form-group col-md-3">
                                             <div class="col-md-12">
-                                                <label for="fromBranch" class="control-label">From</label>
+                                                <label for="fromBranch" class="control-label">Source Branch</label>
                                                 <g:select class="form-control fromBranch" id="fromBranch" name='fromBranch'
                                                           noSelection="${['': 'Select One...']}"
                                                           from='${com.startup.inventory.Branch.values()}'
@@ -159,7 +159,7 @@
 
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Customer</label>
+                                                <label for="description" class="control-label">Destination Customer</label>
                                                 <g:textField class="form-control toCustomer" id="toCustomer"
                                                              name="toCustomer" placeholder="Enter Customer Name."/>
                                                 <span class="help-block" for="description"></span>
@@ -406,6 +406,11 @@
             autoclose: true
         });
 
+        $('#ddatepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            gotoCurrent: true,
+            autoclose: true
+        });
 
         var oTable1 = $('#list-table').dataTable({
             "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
