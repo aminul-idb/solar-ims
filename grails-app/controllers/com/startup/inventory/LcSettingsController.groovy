@@ -43,7 +43,7 @@ class LcSettingsController {
 
     @Transactional
     def save(LcSettings lcSettings) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/lcSettings/index')
             return
@@ -56,7 +56,7 @@ class LcSettingsController {
         }
 
         if (lcSettings.hasErrors()) {
-            def result = [isError: true, message: "Have some problem in data!!"]
+            def result = [isError: true, message: "LC No. must be unique!!"]
             render result as JSON
             return
         }
@@ -83,7 +83,7 @@ class LcSettingsController {
     }
 
     def edit(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/lcSettings/index')
             return
@@ -101,7 +101,7 @@ class LcSettingsController {
     }
 
     def delete(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/lcSettings/index')
             return

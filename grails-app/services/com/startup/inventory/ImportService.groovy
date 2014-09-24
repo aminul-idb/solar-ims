@@ -22,8 +22,16 @@ class ImportService {
         def c = Import.createCriteria()
         def results = c.list(max: iDisplayLength, offset: iDisplayStart) {
 
+            createAlias('lcSettings', 'lc')
+            createAlias('productItem', 'pm')
+            createAlias('categoryType', 'cat')
             if (sSearch) {
-                like("lcSettings", sSearch)
+                or{
+                    ilike("lc.lcNo", sSearch)
+                    ilike("pm.name", sSearch)
+                    ilike("pm.name", sSearch)
+                    ilike("cat.name", sSearch)
+                }
             }
 
             order(sortColumn, sSortDir)
@@ -44,7 +52,7 @@ class ImportService {
                 }
                 entryDateStr =anImport.entryDate? CommonUtils.getUiDateStr(anImport.entryDate):''
                 importDateStr =anImport.importDate? CommonUtils.getUiDateStr(anImport.importDate):''
-                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcSettings.lcNo,2:anImport.productItem.name, 3:anImport.amount, 4:entryDateStr, 5:anImport.status.value, 6:''])
+                dataReturns.add([DT_RowId: anImport.id, 0: serial, 1: anImport.lcSettings.lcNo,2:anImport.categoryType.name, 3:anImport.productItem.name, 4:anImport.amount, 5:anImport.status.value, 6:''])
             }
         }
         return [totalCount:totalCount,results:dataReturns]

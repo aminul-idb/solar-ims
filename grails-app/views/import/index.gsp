@@ -58,15 +58,6 @@
                                             </div>
                                         </div>
 
-                                        %{--<div class="form-group col-md-3">
-                                            <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Import Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepicker"
-                                                       name="importDate" placeholder="Enter Import Date."/>
-                                                <span class="help-block" for="datepicker"></span>
-                                            </div>
-                                        </div>--}%
-
                                         <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Description</label>
@@ -104,7 +95,7 @@
                                                         <td><input type="checkbox" name="productCheck" value="${productItem?.id}" /></td>
                                                         <td>${productItem?.name}</td>
                                                         <td>${productItem?.categoryType?.name}</td>
-                                                        <td><input type="number" name="amount" /></td>
+                                                        <td><input type="number" name="amount"/></td>
                                                         <td><input type="number" name="productPrice" /></td>
                                                     </tr>
                                                 </g:each>
@@ -130,7 +121,7 @@
                                         <input type="hidden" id="edit" name="edit" value="edit" />
                                         <input type="hidden" id="importProduct" name="importProductId" />
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="lcSettings" class="control-label">LC No.</label>
 
@@ -143,16 +134,7 @@
                                             </div>
                                         </div>
 
-                                        %{--<div class="form-group col-md-3">
-                                            <div class="col-md-12">
-                                                <label for="datepicker" class="control-label ">Import Date</label>
-                                                <input type="text" class="form-control datepicker" id="datepicker"
-                                                       name="importDate" placeholder="Enter Import Date."/>
-                                                <span class="help-block" for="datepicker"></span>
-                                            </div>
-                                        </div>--}%
-
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Import Description</label>
                                                 <g:textField class="form-control" id="description"
@@ -161,7 +143,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
@@ -186,7 +168,7 @@
                                                 <tr>
                                                     <td><input type="text" name="productItem" id="productItem" disabled="disabled" /></td>
                                                     <td><input type="text" name="categoryType" id="categoryType" disabled="disabled" /></td>
-                                                    <td><input type="number" name="amount" id="amount" /></td>
+                                                    <td><input type="number" name="amount"/></td>
                                                     <td><input type="number" name="productPrice" id="productPrice" /></td>
                                                 </tr>
                                                 </tbody>
@@ -229,18 +211,18 @@
                                     <table class="table table-striped table-hover table-bordered" id="list-table">
                                         <thead>
                                         <tr>
-                                            <th>Serial</th>
-                                            <th>LC No.</th>
-                                            <th>Category</th>
-                                            <th>Quantity</th>
-                                            <th>Entry Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Serial</th>
+                                            <th class="text-center">LC No.</th>
+                                            <th class="text-center">Product</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <g:each in="${dataReturn}" var="animated">
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td>${animated[0]}</td>
                                                 <td>${animated[1]}</td>
                                                 <td class="bigFont">${animated[2]}</td>
@@ -319,16 +301,24 @@
                 dataType: "json",
                 data: $("#create-form-product").serialize(),
                 success: function (data) {
-                    //clearForm(form);
-                    //clearForm('#create-form-product');
-                    $("#animportCreate").toggle(500);
-                    var table = $('#list-table').DataTable();
-                    table.ajax.reload();
-                    setTimeout(function() {
-                        $.gritter.add({
-                            title: data.message
-                        });
-                    }, 2000);
+                    if(data.isError == false){
+                        $('#create-form-product')[0].reset();
+                        $("#animportCreate").toggle(500);
+                        var table = $('#list-table').DataTable();
+                        table.ajax.reload();
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }else{
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }
+
                 },
                 failure: function (data) {
                 }
@@ -343,17 +333,26 @@
                 dataType: "json",
                 data: $("#edit-form-product").serialize(),
                 success: function (data) {
-                    //clearForm(form);
-                    clearForm('#edit-form-product');
-                    $('#edit').val("edit");
-                    $("#animportCreate").toggle(500);
-                    var table = $('#list-table').DataTable();
-                    table.ajax.reload();
-                    setTimeout(function() {
-                        $.gritter.add({
-                            title: data.message
-                        });
-                    }, 2000);
+                    if(data.isError == false){
+                        $('#create-form-product')[0].reset();
+                        $('#edit').val("edit");
+                        $("#animportCreate").toggle(500);
+                        var table = $('#list-table').DataTable();
+                        table.ajax.reload();
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }
+                    else{
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }
+
                 },
                 failure: function (data) {
                 }
@@ -374,7 +373,7 @@
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
-            "deferLoading": ${totalCount},
+            %{--"deferLoading": ${totalCount},--}%
             "sAjaxSource": "${g.createLink(controller: 'import',action: 'list')}",
             "fnRowCallback": function (nRow, aData, iDisplayIndex) {
                 if (aData.DT_RowId == undefined) {
@@ -398,23 +397,13 @@
             ]
         });
 
-        /*var oTable2 = $('#productList-table').dataTable({
-            "sDom": " ",
-            aoColumns: [
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false }
-            ]
-        });*/
-
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);
             $("#lcSettings").focus();
             $('#create-form-product').show();
             $('#edit-form-product').hide();
             $( "#create-form-product" )[ 0 ].reset();
+
 
 
             e.preventDefault();

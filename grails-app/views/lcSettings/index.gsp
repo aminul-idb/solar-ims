@@ -47,7 +47,7 @@
                                         <g:hiddenField name="id"/>
                                         <input type="hidden" name="edit" value="" id="edit" />
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="lcNo" class="control-label">LC No.</label>
                                                 <g:textField class="form-control" id="lcNo" tabindex="1" name="lcNo"
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="datepicker" class="control-label">LC Date</label>
                                                 <input type="text" required="required" class="form-control datepicker" id="datepicker"
@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Lc Description</label>
                                                 <g:textField class="form-control" id="description"
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <div class="col-md-12">
                                                 <label for="status" class=" control-label">Status </label><br>
                                                 <g:select class="form-control" id="status" name='status'
@@ -209,15 +209,24 @@
                 dataType: "json",
                 data: $("#create-form").serialize(),
                 success: function (data) {
-                    clearForm(form);
-                    var table = $('#list-table').DataTable();
-                    table.ajax.reload();
-                    $("#animportCreate").toggle(500);
-                    setTimeout(function() {
-                        $.gritter.add({
-                            title: data.message
-                        });
-                    }, 2000);
+                    if(data.isError == false){
+                        clearForm(form);
+                        var table = $('#list-table').DataTable();
+                        table.ajax.reload();
+                        $("#animportCreate").toggle(500);
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }else{
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }
+
                 },
                 failure: function (data) {
                 }
@@ -238,7 +247,7 @@
 //            "bProcessing": true,
             "bAutoWidth": true,
             "bServerSide": true,
-            "deferLoading": ${totalCount},
+            %{--"deferLoading": ${totalCount},--}%
             "sAjaxSource": "${g.createLink(controller: 'lcSettings',action: 'list')}",
             "fnRowCallback": function (nRow, aData, iDisplayIndex) {
                 if (aData.DT_RowId == undefined) {

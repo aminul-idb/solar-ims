@@ -9,7 +9,7 @@ class LcSettings {
     Status status
 
     static constraints = {
-        lcNo nullable: false, blank: false
+        lcNo nullable: false, blank: false, unique: true
         entryDate nullable: true, blank: true
         description nullable: true, blank: true
     }

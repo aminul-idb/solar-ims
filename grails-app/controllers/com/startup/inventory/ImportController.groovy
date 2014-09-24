@@ -45,7 +45,7 @@ class ImportController {
 
     //@Transactional
     def save() {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/import/index')
             return
@@ -58,19 +58,25 @@ class ImportController {
                 render result as JSON
                 return
             }
+
+            if (!params.amount) {
+                def result = [isError: true, message: "Category Amount does not insert!"]
+                render result as JSON
+                return
+            }
             anImport.amount = params.amount
             anImport.productPrice = params.productPrice
             anImport.save(flush: true)
-            def result = [isError: true, message: "Import Updated successfully!!"]
+            def result = [isError: false, message: "Import Product Updated Successfully!!"]
             render result as JSON
             return
         }
 
-//        print(params.productItemId)
-//        def productItem = Arrays.asList(params.productItemId)
-//        print("productItem >> "+ productItem)
-//        if (productItem.size())
-
+        if (!params.productCheck) {
+            def result = [isError: true, message: "Check the Category Item and Quantity"]
+            render result as JSON
+            return
+        }
         // save
         def productItemList = Arrays.asList(params.productItemId)
         def amountList = Arrays.asList(params.amount)
@@ -78,10 +84,10 @@ class ImportController {
         def productCheckList = Arrays.asList(params.productCheck)
         def lcNo = LcSettings.get(params.lcSettings as Long)
 
+
         for(int i=0; i<productItemList.size(); i++){
             Import anImport = new Import()
-            if ( (amountList[i] != '') && (productItemList[i] in productCheckList == true)  ){
-//                anImport.importDate = Date.parse('dd/MM/yyyy', lcNo.lcDate)
+            if ( (amountList[i] != '') && (productItemList[i] in productCheckList)  ){
                 anImport.amount = amountList[i] as String
                 anImport.productPrice = productPriceList[i] as String
                 anImport.status = params.status
@@ -98,12 +104,12 @@ class ImportController {
             }
         }
 
-        def result = [isError: true, message: "Import Updated successfully!"]
+        def result = [isError: false, message: "Import Product Save Successfully!"]
         render result as JSON
     }
 
     def edit(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/import/index')
             return
@@ -119,7 +125,7 @@ class ImportController {
     }
 
     def delete(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/import/index')
             return
@@ -164,10 +170,8 @@ class ImportController {
                         results.productItem.name[i],
                         results.amount[i],
                         results.entryDate[i].format('dd/MM/yyyy'),
-                        //results.importDate[i].format('dd/MM/yyyy'),
                         results.categoryType.name[i]
                 ]
-                print("??" + results.categoryType.name[0])
                 resultList << result
             }
 
