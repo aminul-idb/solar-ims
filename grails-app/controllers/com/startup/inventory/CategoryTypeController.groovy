@@ -55,7 +55,7 @@ class CategoryTypeController {
         }
 
         if (categoryType.hasErrors()) {
-            def result = [isError: true, message: "Have some problem in data!!"]
+            def result = [isError: true, message: "Product Name and Priority must be unique!!"]
             render result as JSON
             return
         }
@@ -67,30 +67,28 @@ class CategoryTypeController {
             return
         }
 
-        def result = [isError: false, message: "Category save successsfully!"]
+        def result = [isError: false, message: "Category Save Successfully!"]
         render result as JSON
     }
 
     def edit(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/categoryType/index')
             return
         }
-
         CategoryType categoryType = CategoryType.read(id)
         if (!categoryType) {
             def result = [isError: true, message: "Category name not found!!"]
             render result as JSON
             return
         }
-
         def result = [isError: false, obj: categoryType]
         render result as JSON
     }
 
     def delete(Long id) {
-        if (!request.method == 'POST') {
+        if (request.method != 'POST') {
             flash.message = "Method Problem!"
             render(view: '/categoryType/index')
             return
@@ -101,26 +99,8 @@ class CategoryTypeController {
             render result as JSON
             return
         }
-
         categoryType.delete(flush: true)
         def result = [isError: false, message: "Category deleted successfully!!"]
         render result as JSON
-    }
-}
-
-
-
-class CategoryTypeCommand{
-
-    Long id
-    String name
-    String description
-    Status status
-
-    static constraints = {
-        id nullable: true
-        name nullable: false
-        description nullable: true
-        status nullable: true
     }
 }

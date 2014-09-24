@@ -37,7 +37,6 @@
 <div class="col-lg-12">
 <div class="wrapper wrapper-content animated fadeInRight">
 <div class="ibox-content p-xl">
-
 <div class="row">
 <div class="col-md-12">
 <section class="panel">

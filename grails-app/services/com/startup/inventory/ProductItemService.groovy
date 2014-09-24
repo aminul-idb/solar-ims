@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 @Transactional
 class ProductItemService {
 
-    static final String[] sortColumns = ['id','name']
+    static final String[] sortColumns = ['id','name','categoryType']
     LinkedHashMap productNamePaginateList(GrailsParameterMap params){
         int iDisplayStart = params.iDisplayStart ? params.getInt('iDisplayStart') : CommonUtils.DEFAULT_PAGINATION_START
         int iDisplayLength = params.iDisplayLength ? params.getInt('iDisplayLength') : CommonUtils.DEFAULT_PAGINATION_LENGTH
@@ -21,9 +21,13 @@ class ProductItemService {
         List dataReturns = new ArrayList()
         def c = ProductItem.createCriteria()
         def results = c.list(max: iDisplayLength, offset: iDisplayStart) {
+            createAlias('categoryType', 'cat')
 
             if (sSearch) {
-                like("name", sSearch)
+                or{
+                    ilike("name", sSearch)
+                    ilike("cat.name", sSearch)
+                }
             }
             order(sortColumn, sSortDir)
         }

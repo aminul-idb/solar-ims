@@ -178,10 +178,10 @@
         },
         messages: {
             name: {
-                required: "Please provide a Name"
+                required: " "
             },
             priority: {
-                required: "Please provide a Priority"
+                required: " "
             }
 
         },
@@ -204,15 +204,23 @@
                 dataType: "json",
                 data: $("#create-form").serialize(),
                 success: function (data) {
-                    clearForm(form);
-                    var table = $('#list-table').DataTable();
-                    $("#catNameCreate").toggle(500);
-                    table.ajax.reload();
-                    setTimeout(function() {
-                        $.gritter.add({
-                            title: data.message
-                        });
-                    }, 2000);
+                    if(data.isError == false){
+                        clearForm(form);
+                        var table = $('#list-table').DataTable();
+                        $("#catNameCreate").toggle(500);
+                        table.ajax.reload();
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }else{
+                        setTimeout(function() {
+                            $.gritter.add({
+                                title: data.message
+                            });
+                        }, 2000);
+                    }
                 },
                 failure: function (data) {
                 }
@@ -237,7 +245,8 @@
                 return nRow;
             },
             'iDisplayLength': 100,
-            "aaSorting": [[0, 'ase']],
+//            "aaSorting": [[0, 'ase']],
+//            "aaSorting": [[0, 'desc']],
             "aoColumns": [
                 null/*{ "bSortable": false }*/,
                 null/*{ "bSortable": false }*/,
@@ -272,11 +281,11 @@
                         $("#catNameCreate").toggle(500);
                         $("#name").focus();
                     } else {
-                        setTimeout(function() {
+                        /*setTimeout(function() {
                             $.gritter.add({
                                 title: data.message
                             });
-                        }, 2000);
+                        }, 2000);*/
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
