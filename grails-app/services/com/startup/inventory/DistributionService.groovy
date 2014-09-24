@@ -22,8 +22,17 @@ class DistributionService {
             def c = BranchDistribution.createCriteria()
             def results = c.list(max: iDisplayLength, offset: iDisplayStart) {
 
+                createAlias('productItem', 'pm')
+                createAlias('productItem.categoryType', 'cat')
+
                 if (sSearch) {
-                    like("fromBranch", sSearch)
+                    or{
+                        ilike("fromBranch", sSearch)
+                        ilike("toBranch", sSearch)
+                        ilike("pm.name", sSearch)
+                        ilike("cat.name", sSearch)
+                    }
+
                 }
 
                 order(sortColumn, sSortDir)

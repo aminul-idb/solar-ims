@@ -29,7 +29,6 @@ class ImportService {
                 or{
                     ilike("lc.lcNo", sSearch)
                     ilike("pm.name", sSearch)
-                    ilike("pm.name", sSearch)
                     ilike("cat.name", sSearch)
                 }
             }
