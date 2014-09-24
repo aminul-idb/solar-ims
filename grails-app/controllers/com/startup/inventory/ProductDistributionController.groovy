@@ -117,90 +117,129 @@ class ProductDistributionController {
         def dateFormat =  productDistribution.distributionDate.format('dd-MMMM-yyyy')
         def dateSplit = dateFormat.split('-')
         String month = dateSplit[1] as String
-
-        // product item
-        // category name
-        // year all same hole then amount update hobe
-        // otherwise intert hobe ! :)
-
         ProductItem productItem = productDistribution.productItem
         CategoryType categoryType = productDistribution.categoryType
         def year = dateSplit[2]
 
-
-
-
         switch (month) {
             case "January":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        janToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            janToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.janToAmount = (yearlyReportCheck.janToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "February":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        febToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            febToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.febToAmount = (yearlyReportCheck.febToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "March":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        marToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            marToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.marToAmount = (yearlyReportCheck.marToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "April":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        aprToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            aprToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.aprToAmount = (yearlyReportCheck.aprToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "May":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        mayToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            mayToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.mayToAmount = (yearlyReportCheck.mayToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "June":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        junToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            junToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.junToAmount = (yearlyReportCheck.junToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "July":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        julToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            julToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.julToAmount = (yearlyReportCheck.julToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "August":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        augToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            augToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.augToAmount = (yearlyReportCheck.augToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "September":
@@ -214,36 +253,53 @@ class ProductDistributionController {
                     ).save(flush: true)
                 }else {
                     yearlyReportCheck.sepToAmount = (yearlyReportCheck.sepToAmount as Integer) + (productDistribution.amount as Integer)
-//                    yearlyReportCheck.sepToAmount = sepAmount
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
 
             case "October":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        octToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            octToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.octToAmount = (yearlyReportCheck.octToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "November":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        novToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            novToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.novToAmount = (yearlyReportCheck.novToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "December":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        decToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck) {
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            decToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.decToAmount = (yearlyReportCheck.decToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             default:
