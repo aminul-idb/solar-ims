@@ -250,70 +250,66 @@
 
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox-content p-xl">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <section class="panel">
+                <section class="panel">
 
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table text-center table-striped table-hover table-bordered" id="list-table">
-                                        <thead>
-                                        <tr>
-                                            <th class="text-center">Serial</th>
-                                            <th class="text-center">Source Branch</th>
-                                            <th class="text-center">Destination Customer</th>
-                                            <th class="text-center">Category</th>
-                                            <th class="text-center">Product</th>
-                                            <th class="text-center">Quantity</th>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Address</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <g:each in="${dataReturn}" var="animated">
-                                            <tr>
-                                                <td>${animated[0]}</td>
-                                                <td>${animated[1]}</td>
-                                                <td>${animated[2]}</td>
-                                                <td class="bigFont">${animated[3]}</td>
-                                                <td>${animated[4]}</td>
-                                                <td>${animated[5]}</td>
-                                                <td>${animated[6]}</td>
-                                                <td>${animated[7]}</td>
-                                                <td>${animated[8]}</td>
-                                                <td>
-                                                    <sec:access controller="productDistribution" action="edit">
-                                                        <span class="col-xs-6"><a href=""
-                                                                                  referenceId="${animated.DT_RowId}"
-                                                                                  class="edit-reference"
-                                                                                  title="Edit"><span
-                                                                    class="green fa fa-edit"></span>&nbsp;Edit&nbsp;</a>
-                                                        </span>
-                                                    </sec:access>
-                                                    <sec:access controller="productDistribution" action="delete">
-                                                        <span class="col-xs-6"><a href=""
-                                                                                  referenceId="${animated.DT_RowId}"
-                                                                                  class="delete-reference"
-                                                                                  title="Delete"><span
-                                                                    class="green fa fa-cut"></span>&nbsp;Delete&nbsp;
-                                                        </a></span>
-                                                    </sec:access>
-                                                </td>
-                                            </tr>
-                                        </g:each>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table text-center table-striped table-hover table-bordered" id="list-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Serial</th>
+                                    <th class="text-center">Source Branch</th>
+                                    <th class="text-center">Destination Customer</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Product</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <g:each in="${dataReturn}" var="animated">
+                                    <tr>
+                                        <td>${animated[0]}</td>
+                                        <td>${animated[1]}</td>
+                                        <td>${animated[2]}</td>
+                                        <td class="bigFont">${animated[3]}</td>
+                                        <td>${animated[4]}</td>
+                                        <td>${animated[5]}</td>
+                                        <td>${animated[6]}</td>
+                                        <td>${animated[7]}</td>
+                                        <td>${animated[8]}</td>
+                                        <td class="col-md-12">
+                                            <sec:access controller="productDistribution" action="edit">
+                                                <span class="col-md-10"><a href=""
+                                                                          referenceId="${animated.DT_RowId}"
+                                                                          class="edit-reference"
+                                                                          title="Edit"><span
+                                                            class="green fa fa-edit"></span>&nbsp;Edit</a>
+                                                </span>
+                                            </sec:access>
+                                            <sec:access controller="productDistribution" action="delete">
+                                                <span class="col-md-10"><a href=""
+                                                                          referenceId="${animated.DT_RowId}"
+                                                                          class="delete-reference"
+                                                                          title="Delete"><span
+                                                            class="green fa fa-cut"></span>&nbsp;Delete
+                                                </a></span>
+                                            </sec:access>
+                                        </td>
+                                    </tr>
+                                </g:each>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
@@ -377,17 +373,25 @@
                     dataType: "json",
                     data: $("#create-form-product").serialize(),
                     success: function (data) {
-                        //clearForm('#create-form-product');
-                        var table = $('#list-table').DataTable();
+                        if(data.isError == false){
+                            //clearForm('#create-form-product');
+                            var table = $('#list-table').DataTable();
+                            $("#animportCreate").toggle(500);
+                            table.ajax.reload();
+                            setTimeout(function() {
+                                $.gritter.add({
+                                    title: data.message
+                                });
+                            }, 2000);
+                        }
+                        else{
+                            setTimeout(function() {
+                                $.gritter.add({
+                                    title: data.message
+                                });
+                            }, 2000);
+                        }
 
-
-                        $("#animportCreate").toggle(500);
-                        table.ajax.reload();
-                        setTimeout(function() {
-                            $.gritter.add({
-                                title: data.message
-                            });
-                        }, 2000);
                     },
                     failure: function (data) {
                     }
@@ -435,17 +439,6 @@
             ]
         });
 
-        /*var oTable2 = $('#productList-table').dataTable({
-            "sDom": " ",
-            aoColumns: [
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false }
-            ]
-        });*/
-
         $('#add-new-btn').click(function (e) {
             $("#animportCreate").toggle(500);
             $( "#create-form-product" )[ 0 ].reset();
@@ -482,12 +475,7 @@
                         $('#categoryType').val(data.categoryType);
                         $('#amount').val(data.productDistribution.amount);
                         $('#productPrice').val(data.productDistribution.productPrice);
-
                         $('.status').val(data.productDistribution.status ? data.productDistribution.status.name :'');
-
-                        //document.getElementById("lcSettings").disabled=true;
-                        //document.getElementById("datepicker").disabled=true;
-
                     } else {
                         alert(data.message);
                     }
@@ -549,19 +537,16 @@
 
         });
 
-
-
-
     });
 
     function getActionButtons(nRow, aData) {
         var actionButtons = "";
-        actionButtons += '<sec:access controller="productDistribution" action="edit"><span class="col-xs-6"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
+        actionButtons += '<sec:access controller="productDistribution" action="edit"><span class="col-md-10"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
         actionButtons += '<span class="green green fa fa-edit"></span>';
-        actionButtons += '&nbsp;Edit&nbsp;</a></span></sec:access>';
-        actionButtons += '<sec:access controller="productDistribution" action="delete"><span class="col-xs-6"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
+        actionButtons += '&nbsp;Edit</a></span></sec:access>';
+        actionButtons += '<sec:access controller="productDistribution" action="delete"><span class="col-md-12"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
         actionButtons += '<span class="red green fa fa-cut"></span>';
-        actionButtons += '&nbsp;Delete&nbsp;</a></span></sec:access>';
+        actionButtons += '&nbsp;Delete</a></span></sec:access>';
         return actionButtons;
     }
 

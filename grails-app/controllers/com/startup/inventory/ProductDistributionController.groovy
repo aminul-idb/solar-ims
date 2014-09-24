@@ -74,11 +74,16 @@ class ProductDistributionController {
             productDistribution.productPrice = params.productPrice
             productDistribution.save(flush: true)
 
-            def result = [isError: true, message: "Product Distribution Updated successfully!!"]
+            def result = [isError: false, message: "Product Distribution Updated successfully!!"]
             render result as JSON
             return
         }
 
+        if (!params.productCheck || !params.amount){
+            def result = [isError: true, message: "Check the Category Item and Quantity"]
+            render result as JSON
+            return
+        }
         // save
         def productItemList = Arrays.asList(params.productItemId)
         def amountList = Arrays.asList(params.amount)
@@ -87,7 +92,7 @@ class ProductDistributionController {
 
         for (int i = 0; i < productItemList.size(); i++) {
             ProductDistribution productDistribution = new ProductDistribution()
-            if ((amountList[i] != '') && (productItemList[i] in productCheckList == true)) {
+            if ((amountList[i] != '') && (productItemList[i] in productCheckList)) {
                 println "amount =" + amountList[i] + "| product Id =" + productItemList[i]
                 productDistribution.distributionDate = Date.parse('dd/MM/yyyy', params.distributionDate)
                 productDistribution.toCustomer = params.toCustomer
@@ -103,7 +108,7 @@ class ProductDistributionController {
                 yearlyReportSave(productDistributionSaved)
             }
         }
-        def result = [isError: true, message: "Product Distribution Save successfully!!"]
+        def result = [isError: false, message: "Product Distribution Save successfully!!"]
         render result as JSON
     }
 
@@ -112,6 +117,18 @@ class ProductDistributionController {
         def dateFormat =  productDistribution.distributionDate.format('dd-MMMM-yyyy')
         def dateSplit = dateFormat.split('-')
         String month = dateSplit[1] as String
+
+        // product item
+        // category name
+        // year all same hole then amount update hobe
+        // otherwise intert hobe ! :)
+
+        ProductItem productItem = productDistribution.productItem
+        CategoryType categoryType = productDistribution.categoryType
+        def year = dateSplit[2]
+
+
+
 
         switch (month) {
             case "January":
@@ -187,12 +204,19 @@ class ProductDistributionController {
                 break;
 
             case "September":
-                YearlyReport yearlyReport = new YearlyReport(
-                        categoryType: productDistribution.categoryType,
-                        productItem: productDistribution.productItem,
-                        year: dateSplit[2],
-                        sepToAmount: productDistribution.amount
-                ).save(flush: true)
+                YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYear(categoryType,productItem,year)
+                if (!yearlyReportCheck){
+                    YearlyReport yearlyReport = new YearlyReport(
+                            categoryType: productDistribution.categoryType,
+                            productItem: productDistribution.productItem,
+                            year: dateSplit[2],
+                            sepToAmount: productDistribution.amount
+                    ).save(flush: true)
+                }else {
+                    yearlyReportCheck.sepToAmount = (yearlyReportCheck.sepToAmount as Integer) + (productDistribution.amount as Integer)
+//                    yearlyReportCheck.sepToAmount = sepAmount
+                    yearlyReportCheck.save(flush: true)
+                }
                 break;
 
             case "October":
