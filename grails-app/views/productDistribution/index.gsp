@@ -286,7 +286,7 @@
                                         <td>${animated[8]}</td>
                                         <td class="col-md-12">
                                             <sec:access controller="productDistribution" action="edit">
-                                                <span class="col-md-10"><a href=""
+                                                <span class="col-md-12"><a href=""
                                                                            referenceId="${animated.DT_RowId}"
                                                                            class="edit-reference"
                                                                            title="Edit"><span
@@ -294,7 +294,7 @@
                                                 </span>
                                             </sec:access>
                                             <sec:access controller="productDistribution" action="delete">
-                                                <span class="col-md-10"><a href=""
+                                                <span class="col-md-13"><a href=""
                                                                            referenceId="${animated.DT_RowId}"
                                                                            class="delete-reference"
                                                                            title="Delete"><span
@@ -412,7 +412,7 @@
             autoclose: true
         });
 
-        var oTable1 = $('#list-table').dataTable({
+        var oTable1 = $('#list-table').DataTable({
             "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": true,
             "bAutoWidth": true,
@@ -548,10 +548,10 @@
 
     function getActionButtons(nRow, aData) {
         var actionButtons = "";
-        actionButtons += '<sec:access controller="productDistribution" action="edit"><span class="col-md-10"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
+        actionButtons += '<sec:access controller="productDistribution" action="edit"><span class="col-md-12"><a href="" referenceId="' + aData.DT_RowId + '" class="edit-reference" title="Edit">';
         actionButtons += '<span class="green green fa fa-edit"></span>';
         actionButtons += '&nbsp;Edit</a></span></sec:access>';
-        actionButtons += '<sec:access controller="productDistribution" action="delete"><span class="col-md-12"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
+        actionButtons += '<sec:access controller="productDistribution" action="delete"><span class="col-md-13"><a href="" referenceId="' + aData.DT_RowId + '" class="delete-reference" title="Delete">';
         actionButtons += '<span class="red green fa fa-cut"></span>';
         actionButtons += '&nbsp;Delete</a></span></sec:access>';
         return actionButtons;

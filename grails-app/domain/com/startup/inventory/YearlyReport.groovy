@@ -3,18 +3,18 @@ package com.startup.inventory
 class YearlyReport {
     CategoryType categoryType
     ProductItem productItem
-    String janToAmount
-    String febToAmount
-    String marToAmount
-    String aprToAmount
-    String mayToAmount
-    String junToAmount
-    String julToAmount
-    String augToAmount
-    String sepToAmount
-    String octToAmount
-    String novToAmount
-    String decToAmount
+    Integer janToAmount = 0
+    Integer febToAmount = 0
+    Integer marToAmount = 0
+    Integer aprToAmount = 0
+    Integer mayToAmount = 0
+    Integer junToAmount = 0
+    Integer julToAmount = 0
+    Integer augToAmount = 0
+    Integer sepToAmount = 0
+    Integer octToAmount = 0
+    Integer novToAmount = 0
+    Integer decToAmount = 0
     String year
 
     static constraints = {

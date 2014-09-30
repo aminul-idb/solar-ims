@@ -136,10 +136,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            janToAmount: productDistribution.amount
+                            janToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.janToAmount = (yearlyReportCheck.janToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.janToAmount = yearlyReportCheck.janToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -151,10 +151,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            febToAmount: productDistribution.amount
+                            febToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.febToAmount = (yearlyReportCheck.febToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.febToAmount = yearlyReportCheck.febToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -166,10 +166,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            marToAmount: productDistribution.amount
+                            marToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.marToAmount = (yearlyReportCheck.marToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.marToAmount = yearlyReportCheck.marToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -181,10 +181,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            aprToAmount: productDistribution.amount
+                            aprToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.aprToAmount = (yearlyReportCheck.aprToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.aprToAmount = yearlyReportCheck.aprToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -196,10 +196,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            mayToAmount: productDistribution.amount
+                            mayToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.mayToAmount = (yearlyReportCheck.mayToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.mayToAmount = yearlyReportCheck.mayToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -211,10 +211,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            junToAmount: productDistribution.amount
+                            junToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.junToAmount = (yearlyReportCheck.junToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.junToAmount = yearlyReportCheck.junToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -226,10 +226,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            julToAmount: productDistribution.amount
+                            julToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.julToAmount = (yearlyReportCheck.julToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.julToAmount = yearlyReportCheck.julToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -241,10 +241,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            augToAmount: productDistribution.amount
+                            augToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.augToAmount = (yearlyReportCheck.augToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.augToAmount = yearlyReportCheck.augToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -252,14 +252,15 @@ class ProductDistributionController {
             case "September":
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndSepToAmountIsNotNull(categoryType, productItem, year)
                 if (!yearlyReportCheck) {
+                    print("if>>")
                     YearlyReport yearlyReport = new YearlyReport(
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            sepToAmount: productDistribution.amount
+                            sepToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.sepToAmount = (yearlyReportCheck.sepToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.sepToAmount = yearlyReportCheck.sepToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -271,10 +272,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            octToAmount: productDistribution.amount
+                            octToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.octToAmount = (yearlyReportCheck.octToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.octToAmount = yearlyReportCheck.octToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -286,10 +287,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            novToAmount: productDistribution.amount
+                            novToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.novToAmount = (yearlyReportCheck.novToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.novToAmount = yearlyReportCheck.novToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -301,10 +302,10 @@ class ProductDistributionController {
                             categoryType: productDistribution.categoryType,
                             productItem: productDistribution.productItem,
                             year: dateSplit[2],
-                            decToAmount: productDistribution.amount
+                            decToAmount: productDistribution.amount as Integer
                     ).save(flush: true)
                 } else {
-                    yearlyReportCheck.decToAmount = (yearlyReportCheck.decToAmount as Integer) + (productDistribution.amount as Integer)
+                    yearlyReportCheck.decToAmount = yearlyReportCheck.decToAmount + (productDistribution.amount as Integer)
                     yearlyReportCheck.save(flush: true)
                 }
                 break;
@@ -318,8 +319,7 @@ class ProductDistributionController {
 
     }
 
-    def private
-    static yearlyReportUpdate(Integer oldAmount, Integer newAmount, ProductDistribution productDistribution) {
+    def private static yearlyReportUpdate(Integer oldAmount, Integer newAmount, ProductDistribution productDistribution) {
         def dateFormat = productDistribution.distributionDate.format('dd-MMMM-yyyy')
         def dateSplit = dateFormat.split('-')
         String month = dateSplit[1] as String
@@ -332,10 +332,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJanToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.janToAmount = (yearlyReportCheck.janToAmount as Integer) - amount
+                    yearlyReportCheck.janToAmount = yearlyReportCheck.janToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.janToAmount = (yearlyReportCheck.janToAmount as Integer) + amount
+                    yearlyReportCheck.janToAmount = yearlyReportCheck.janToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -344,10 +344,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndFebToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.febToAmount = (yearlyReportCheck.febToAmount as Integer) - amount
+                    yearlyReportCheck.febToAmount = yearlyReportCheck.febToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.febToAmount = (yearlyReportCheck.febToAmount as Integer) + amount
+                    yearlyReportCheck.febToAmount = yearlyReportCheck.febToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -356,10 +356,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndMarToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.marToAmount = (yearlyReportCheck.marToAmount as Integer) - amount
+                    yearlyReportCheck.marToAmount = yearlyReportCheck.marToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.marToAmount = (yearlyReportCheck.marToAmount as Integer) + amount
+                    yearlyReportCheck.marToAmount = yearlyReportCheck.marToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -368,10 +368,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndAprToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.aprToAmount = (yearlyReportCheck.aprToAmount as Integer) - amount
+                    yearlyReportCheck.aprToAmount = yearlyReportCheck.aprToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.aprToAmount = (yearlyReportCheck.aprToAmount as Integer) + amount
+                    yearlyReportCheck.aprToAmount = yearlyReportCheck.aprToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -380,10 +380,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndMayToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.mayToAmount = (yearlyReportCheck.mayToAmount as Integer) - amount
+                    yearlyReportCheck.mayToAmount = yearlyReportCheck.mayToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.mayToAmount = (yearlyReportCheck.mayToAmount as Integer) + amount
+                    yearlyReportCheck.mayToAmount = yearlyReportCheck.mayToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -392,10 +392,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJunToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.junToAmount = (yearlyReportCheck.junToAmount as Integer) - amount
+                    yearlyReportCheck.junToAmount = yearlyReportCheck.junToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.junToAmount = (yearlyReportCheck.junToAmount as Integer) + amount
+                    yearlyReportCheck.junToAmount = yearlyReportCheck.junToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -404,10 +404,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndJulToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.julToAmount = (yearlyReportCheck.julToAmount as Integer) - amount
+                    yearlyReportCheck.julToAmount = yearlyReportCheck.julToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.julToAmount = (yearlyReportCheck.julToAmount as Integer) + amount
+                    yearlyReportCheck.julToAmount = yearlyReportCheck.julToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -416,10 +416,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndAugToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.augToAmount = (yearlyReportCheck.augToAmount as Integer) - amount
+                    yearlyReportCheck.augToAmount = yearlyReportCheck.augToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.augToAmount = (yearlyReportCheck.augToAmount as Integer) + amount
+                    yearlyReportCheck.augToAmount = yearlyReportCheck.augToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -428,10 +428,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndSepToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.sepToAmount = (yearlyReportCheck.sepToAmount as Integer) - amount
+                    yearlyReportCheck.sepToAmount = yearlyReportCheck.sepToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.sepToAmount = (yearlyReportCheck.sepToAmount as Integer) + amount
+                    yearlyReportCheck.sepToAmount = yearlyReportCheck.sepToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -440,10 +440,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndOctToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.octToAmount = (yearlyReportCheck.octToAmount as Integer) - amount
+                    yearlyReportCheck.octToAmount = yearlyReportCheck.octToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.octToAmount = (yearlyReportCheck.octToAmount as Integer) + amount
+                    yearlyReportCheck.octToAmount = yearlyReportCheck.octToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -452,10 +452,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndNovToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.novToAmount = (yearlyReportCheck.novToAmount as Integer) - amount
+                    yearlyReportCheck.novToAmount = yearlyReportCheck.novToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.novToAmount = (yearlyReportCheck.novToAmount as Integer) + amount
+                    yearlyReportCheck.novToAmount = yearlyReportCheck.novToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;
@@ -464,10 +464,10 @@ class ProductDistributionController {
                 YearlyReport yearlyReportCheck = YearlyReport.findByCategoryTypeAndProductItemAndYearAndDecToAmountIsNotNull(categoryType, productItem, year)
                 if (oldAmount > newAmount) {
                     Integer amount = oldAmount - newAmount
-                    yearlyReportCheck.decToAmount = (yearlyReportCheck.decToAmount as Integer) - amount
+                    yearlyReportCheck.decToAmount = yearlyReportCheck.decToAmount - amount
                 } else {
                     Integer amount = newAmount - oldAmount
-                    yearlyReportCheck.decToAmount = (yearlyReportCheck.decToAmount as Integer) + amount
+                    yearlyReportCheck.decToAmount = yearlyReportCheck.decToAmount + amount
                 }
                 yearlyReportCheck.save(flush: true)
                 break;

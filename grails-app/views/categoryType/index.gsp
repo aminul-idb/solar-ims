@@ -229,7 +229,7 @@
     });
 
     jQuery(function ($) {
-        var oTable1 = $('#list-table').dataTable({
+        var oTable1 = $('#list-table').DataTable({
             "sDom": "<'row'<'col-md-4'><'col-md-4'><'col-md-4'f>r>t<'row'<'col-md-4'l><'col-md-4'i><'col-md-4'p>>",
 //            "bProcessing": false,
             "bAutoWidth": true,

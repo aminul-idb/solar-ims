@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 @Transactional
 class ProductDistributionService {
 
-    static final String[] sortColumns = ['id','fromBranch','toCustomer','distributionDate']
+    static final String[] sortColumns = ['id','fromBranch']
     LinkedHashMap productDistributionPaginateList(GrailsParameterMap params){
         int iDisplayStart = params.iDisplayStart ? params.getInt('iDisplayStart') : CommonUtils.DEFAULT_PAGINATION_START
         int iDisplayLength = params.iDisplayLength ? params.getInt('iDisplayLength') : CommonUtils.DEFAULT_PAGINATION_LENGTH
@@ -33,9 +33,6 @@ class ProductDistributionService {
                     ilike("cat.name", sSearch)
                 }
             }
-
-
-
             order(sortColumn, sSortDir)
         }
         int totalCount = results.totalCount

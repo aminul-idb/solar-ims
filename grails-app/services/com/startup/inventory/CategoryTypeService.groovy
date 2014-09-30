@@ -26,8 +26,8 @@ class CategoryTypeService {
                 like("name", sSearch)
             }
 
-//            order(sortColumn, sSortDir)
-            order("priority", 'asc')
+            order(sortColumn, sSortDir)
+//            order("priority", 'asc')
         }
         int totalCount = results.totalCount
         int serial = iDisplayStart;
