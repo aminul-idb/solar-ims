@@ -52,6 +52,7 @@
                     <li><a href="${g.createLink(controller: 'import', action: 'importReport')}">Import Product</a></li>
                     <li><a href="${g.createLink(controller: 'branchDistribution', action: 'branchDistributionReport')}">Branch Distribution</a></li>
                     <li><a href="${g.createLink(controller: 'productDistribution', action: 'productDistributionReport')}">Product Distribution</a></li>
+                    <li><a href="${g.createLink(controller: 'productDistribution', action: 'yearlyReportGenerated')}">Yearly Sales Report</a></li>
                 </ul>
             </li>
 

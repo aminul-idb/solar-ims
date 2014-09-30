@@ -561,8 +561,6 @@ class ProductDistributionController {
     }
 
     private static final String JASPER_FILE = 'reportInventoryProductDistribution.jasper'
-    private static final String REPORT_FILE_FORMAT = 'pdf'
-    private static final String OUTPUT_FILE_NAME = "reportInventoryProductDistribution.jasper"
 
     def productDistributionReport() {
         if (params.submit == "report") {
@@ -600,5 +598,30 @@ class ProductDistributionController {
             response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
             response.outputStream << report.toByteArray()
         }
+    }
+
+
+
+    // Yearly Sales Report
+    private static final String JASPER_FILE_YEARLY = 'yearlyReport.jasper'
+
+    def yearlyReportGenerated(){
+        Map paramsMap = new LinkedHashMap()
+
+        int year = Calendar.getInstance().get(Calendar.YEAR)
+        String yearly = year as String
+        paramsMap.put("yearly", yearly)
+
+        String outputFileName = 'yearlyReport.pdf'
+        JasperReportDef reportDef = new JasperReportDef(
+                name: JASPER_FILE_YEARLY,
+                fileFormat: JasperExportFormat.PDF_FORMAT,
+                parameters: paramsMap
+        )
+
+        ByteArrayOutputStream report = jasperService.generateReport(reportDef)
+        response.contentType = 'application/pdf'
+        response.setHeader("Content-disposition", "inline;filename=${outputFileName}")
+        response.outputStream << report.toByteArray()
     }
 }
